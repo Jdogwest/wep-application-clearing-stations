@@ -1,0 +1,12 @@
+.preview-block {
+  background-image: url("/assets/img/preview.jpg");
+  background-size: cover;
+  padding: 84px 633px 654px 198px;
+
+  &__title {
+    font-size: 70px;
+    font-weight: 400;
+    line-height: 88px;
+    margin: 0;
+  }
+}

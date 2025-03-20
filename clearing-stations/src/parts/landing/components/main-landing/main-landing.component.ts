@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AboutUsComponent } from '../about-us/about-us.component';
 import { HeaderLandingComponent } from '../header-landing/header-landing.component';
+import { PreviewBlockComponent } from '../preview-block/preview-block.component';
 
 @Component({
   selector: 'app-main-landing',
-  imports: [HeaderLandingComponent, AboutUsComponent],
+  imports: [HeaderLandingComponent, PreviewBlockComponent],
   templateUrl: './main-landing.component.html',
   styleUrl: './main-landing.component.scss',
 })
