@@ -1,0 +1,37 @@
+.about-us-container {
+  padding: 100px 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text-block {
+  width: 48%;
+  line-height: 2;
+  &__title {
+    font-size: 32px;
+    margin: 30px 10px;
+  }
+  &__main-info {
+    font-size: 18px;
+    margin: 0px 10px 30px;
+  }
+  &__list-title {
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  &__ending-text {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.img-block {
+  min-height: 100%;
+  min-width: 48%;
+  background-image: url("/assets/img/about-img-group.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

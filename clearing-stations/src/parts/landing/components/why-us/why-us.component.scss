@@ -1,0 +1,39 @@
+.why-us-container {
+  padding: 50px 200px;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.item {
+  width: 48%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+
+  &-icon {
+    width: 55px;
+    height: 55px;
+    align-self: center;
+    margin-right: 20px;
+  }
+  &-description {
+    width: 90%;
+  }
+  &-name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  &-text {
+    font-size: 16px;
+    font-weight: lighter;
+    line-height: 1.6;
+  }
+}
