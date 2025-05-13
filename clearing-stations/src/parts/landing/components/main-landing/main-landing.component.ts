@@ -7,6 +7,7 @@ import { OurServicesComponent } from '../our-services/our-services.component';
 import { ExamplesOfWorksComponent } from '../examples-of-works/examples-of-works.component';
 import { ContactsComponent } from '../contacts/contacts.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { FooterLandingComponent } from '../footer-landing/footer-landing.component';
 
 @Component({
   selector: 'app-main-landing',
@@ -19,6 +20,7 @@ import { ContactFormComponent } from '../contact-form/contact-form.component';
     ExamplesOfWorksComponent,
     ContactsComponent,
     ContactFormComponent,
+    FooterLandingComponent
   ],
   templateUrl: './main-landing.component.html',
   styleUrl: './main-landing.component.scss',
