@@ -3,7 +3,8 @@
     <h2 class="our-services__title">Наши услуги</h2>
     <div class="our-services__content">
       <div class="our-services__items">
-        <div class="our-services__item" *ngFor="let item of oddDescriptions">
+        @for(item of oddDescriptions; track item.id){
+        <div class="our-services__item">
           <h3 class="our-services__item-name">
             {{ item.id }}. {{ item.title }}
           </h3>
@@ -12,10 +13,12 @@
             Время выполнения: {{ item.time }}
           </p>
         </div>
+        }
       </div>
       <hr class="our-services__item-line" />
       <div class="our-services__items our-services__items--right">
-        <div class="our-services__item" *ngFor="let item of evenDescriptions">
+        @for(item of evenDescriptions; track item.id){
+        <div class="our-services__item">
           <h3 class="our-services__item-name">
             {{ item.id }}. {{ item.title }}
           </h3>
@@ -24,6 +27,7 @@
             Время выполнения: {{ item.time }}
           </p>
         </div>
+        }
       </div>
     </div>
   </div>

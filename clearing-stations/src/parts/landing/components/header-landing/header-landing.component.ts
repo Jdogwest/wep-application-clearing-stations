@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './header-landing.component.html',
   styleUrl: './header-landing.component.scss',
 })
-export class HeaderLandingComponent {}
+export class HeaderLandingComponent {
+  protected goToLogin() {}
+}

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MainLandingComponent } from '../landing/components/main-landing/main-landing.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [MainLandingComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
