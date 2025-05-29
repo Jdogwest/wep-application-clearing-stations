@@ -1,0 +1,149 @@
+<div class="modal">
+  <div class="modal__container">
+    @if (isLogin()) {
+    <div class="login">
+      <div class="auth__container">
+        <div class="auth__header">
+          <h2 class="auth__title">Вход в аккаунт</h2>
+          <button class="auth__button-close" type="button"></button>
+        </div>
+        <div class="auth__content">
+          <form class="auth__form" action="" method="POST">
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="email">Email</label>
+              <input
+                class="auth__form-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="ivan@mail.ru"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="password">Пароль</label>
+              <input
+                class="auth__form-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="******"
+              />
+            </div>
+            <div class="auth__form-group">
+              <a href="#" class="auth__link auth__link_forgot"
+                >Забыли пароль?</a
+              >
+            </div>
+            <div class="auth__form-group">
+              <input class="auth__submit" type="submit" value="Войти" />
+            </div>
+          </form>
+          <div class="auth__footer">
+            <p class="auth__text">
+              Ещё не зарегистрированы?
+              <button
+                (click)="goToRegister()"
+                class="auth__link auth__link-selector"
+              >
+                Зарегистрироваться
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div class="register">
+      <div class="auth__container">
+        <div class="auth__header">
+          <h2 class="auth__title">Регистрация</h2>
+          <button class="auth__button-close" type="button"></button>
+        </div>
+        <div class="auth__content">
+          <form class="auth__form" action="" method="POST">
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="email">Фамилия</label>
+              <input
+                class="auth__form-input"
+                type="text"
+                id="surname"
+                name="surname"
+                placeholder="Иванов"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="email">Имя</label>
+              <input
+                class="auth__form-input"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Иван"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="email">Email</label>
+              <input
+                class="auth__form-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="ivan@mail.ru"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="password">Пароль</label>
+              <input
+                class="auth__form-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="******"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label" for="password"
+                >Повторите пароль</label
+              >
+              <input
+                class="auth__form-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="******"
+              />
+            </div>
+            <div class="auth__form-group">
+              <label class="auth__form-label-checkbox"
+                ><input type="checkbox" /> Я согласен с правилами обработки
+                <a class="auth__form-link" href="#"
+                  >персональных данных</a
+                ></label
+              >
+            </div>
+            <div class="auth__form-group">
+              <input
+                class="auth__submit"
+                type="submit"
+                value="Зарегистрироваться"
+              />
+            </div>
+          </form>
+          <div class="auth__footer">
+            <p class="auth__text">
+              Уже есть аккаунт?
+              <button
+                (click)="goToLogin()"
+                href="#"
+                class="auth__link auth__link-selector"
+              >
+                Войти
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { ExamplesOfWorksComponent } from '../examples-of-works/examples-of-works
 import { ContactsComponent } from '../contacts/contacts.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { FooterLandingComponent } from '../footer-landing/footer-landing.component';
+import { ClientAuthComponent } from '../client-auth/client-auth.component';
 
 @Component({
   selector: 'app-main-landing',
@@ -20,7 +21,8 @@ import { FooterLandingComponent } from '../footer-landing/footer-landing.compone
     ExamplesOfWorksComponent,
     ContactsComponent,
     ContactFormComponent,
-    FooterLandingComponent
+    FooterLandingComponent,
+    ClientAuthComponent,
   ],
   templateUrl: './main-landing.component.html',
   styleUrl: './main-landing.component.scss',
