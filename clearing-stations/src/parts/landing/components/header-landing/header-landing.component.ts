@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-header-landing',
@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderLandingComponent {
   protected goToLogin() {}
+  protected readonly isOpen = signal(false);
+
+  toggleMenu() {
+    this.isOpen.set(!this.isOpen());
+  }
 }

@@ -2,7 +2,7 @@
   &__container {
     max-width: 1520px;
     margin: 0 auto;
-    padding: 50px 0 80px;
+    padding: 50px 30px 80px;
   }
   &__title {
     font-size: 32px;
@@ -46,6 +46,28 @@
     gap: 10px;
     &-value {
       color: var(--text-color);
+    }
+  }
+  &__map {
+    &-iframe {
+      width: 600px;
+      height: 450px;
+      border: none;
+    }
+  }
+}
+@media screen and (max-width: 1150px) {
+  .contacts {
+    &__content {
+      flex-direction: column;
+      align-items: start;
+    }
+    &__map {
+      width: 100%;
+      &-iframe {
+        width: 100%;
+        height: 600px;
+      }
     }
   }
 }

@@ -1,41 +1,60 @@
 <header class="header">
-  <div class="header__logo-block">
-    <img src="assets/img/logo.png" alt="Логотип" class="logo-block__image" />
-    <p class="logo-block__title">Обслуживание частых очистных сооружений</p>
-  </div>
-  <nav class="header__navigation">
-    <ul class="navigation__list">
-      <li class="navigation__list-item">
-        <a class="navigation__list-link" href="/">Главная</a>
-      </li>
-      <li class="navigation__list-item">
-        <a class="navigation__list-link" href="#why-us">О нас</a>
-      </li>
-      <li class="navigation__list-item">
-        <a class="navigation__list-link" href="#our-services">Услуги</a>
-      </li>
-      <li class="navigation__list-item">
-        <a class="navigation__list-link" href="#examples">Примеры работ</a>
-      </li>
-      <li class="navigation__list-item">
-        <a class="navigation__list-link" href="#contacts">Контакты</a>
-      </li>
-    </ul>
-  </nav>
-  <div class="header__contacts-and-profile">
-    <div class="contacts-and-profile__phone">
-      <img
-        src="assets/svg/PhoneCalling.svg"
-        alt="Иконка телефона"
-        class="phone__icon"
-      />
-      <div class="phone__wrapper">
-        <p class="phone__number">+7 (800) 555-35-35</p>
-        <p class="phone__order">Заказать звонок</p>
+  <div class="header__container">
+    <div class="header__logo">
+      <div class="header__logo-block">
+        <img
+          src="assets/img/logo.png"
+          alt="Логотип"
+          class="logo-block__image"
+        />
+        <p class="logo-block__title">Обслуживание частых очистных сооружений</p>
       </div>
+      <button (click)="toggleMenu()" class="header__hamburger-btn">
+        <span></span>
+      </button>
     </div>
-    <button class="contacts-and-profile__login-button" (click)="goToLogin()">
-      Войти
-    </button>
+
+    <nav class="header__navigation" [class.header__navigation--open]="isOpen()">
+      <ul class="navigation__list">
+        <li class="navigation__list-item">
+          <a class="navigation__list-link" href="/">Главная</a>
+        </li>
+        <li class="navigation__list-item">
+          <a class="navigation__list-link" href="#why-us">О нас</a>
+        </li>
+        <li class="navigation__list-item">
+          <a class="navigation__list-link" href="#our-services">Услуги</a>
+        </li>
+        <li class="navigation__list-item">
+          <a class="navigation__list-link" href="#examples">Примеры работ</a>
+        </li>
+        <li class="navigation__list-item">
+          <a class="navigation__list-link" href="#contacts">Контакты</a>
+        </li>
+        @if (isOpen()) {
+        <li class="navigation__list-item">
+          <button class="navigation__list-btn" (click)="goToLogin()">
+            Войти
+          </button>
+        </li>
+        }
+      </ul>
+    </nav>
+    <div class="header__contacts-and-profile">
+      <div class="contacts-and-profile__phone">
+        <img
+          src="assets/svg/PhoneCalling.svg"
+          alt="Иконка телефона"
+          class="phone__icon"
+        />
+        <div class="phone__wrapper">
+          <p class="phone__number">+7 (800) 555-35-35</p>
+          <p class="phone__order">Заказать звонок</p>
+        </div>
+      </div>
+      <button class="contacts-and-profile__login-button" (click)="goToLogin()">
+        Войти
+      </button>
+    </div>
   </div>
 </header>

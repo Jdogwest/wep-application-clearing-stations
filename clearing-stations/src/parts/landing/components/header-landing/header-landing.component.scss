@@ -1,25 +1,65 @@
 .header {
-  padding: 15px 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  &__logo-block {
+  padding: 15px 30px;
+  &__container {
+    max-width: 1520px;
+    margin: auto;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
   }
-
+  &__logo {
+    display: flex;
+    align-items: center;
+    &-block {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
   &__navigation {
     display: flex;
-    justify-content: center;
+    align-items: center;
   }
 
   &__contacts-and-profile {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
+  }
+  &__hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: none;
+    & > span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background-color: black;
+      position: relative;
+      transition: 0.3s ease;
+
+      &:before,
+      &:after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        background-color: black;
+        position: absolute;
+        transition: 0.3s ease;
+        left: 0;
+      }
+
+      &:before {
+        top: -8px;
+      }
+
+      &:after {
+        top: 8px;
+      }
+    }
   }
 }
 
@@ -35,19 +75,6 @@
     margin: 0;
     margin-left: 10px;
     color: #5b4a4a;
-  }
-}
-
-.navigation__list {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-
-  &-item {
-    text-align: center;
-    margin: auto 11px;
   }
 }
 
@@ -82,5 +109,67 @@
     text-align: center;
     font-size: 14px;
     color: #5b4a4a;
+  }
+}
+
+.navigation {
+  &__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    gap: 15px;
+    &-link {
+      text-decoration: none;
+      color: black;
+      transition: 0.3s;
+      &:hover {
+        transition: 0.3s;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1150px) {
+  .header {
+    &__container {
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+    }
+    &__navigation,
+    &__contacts-and-profile {
+      display: none;
+    }
+    &__navigation--open {
+      display: flex;
+      padding: 20px;
+    }
+    &__hamburger-btn {
+      display: block;
+    }
+    &__logo {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 30px;
+    }
+  }
+  .navigation {
+    &__list {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      &-btn {
+        padding: 10px 30px;
+        border: none;
+        background: var(--primary-color);
+        color: white;
+        font-size: 18px;
+      }
+    }
   }
 }

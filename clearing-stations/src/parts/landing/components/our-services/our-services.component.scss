@@ -1,8 +1,8 @@
 .our-services {
   &__container {
-    width: 1520px;
+    max-width: 1520px;
     margin: 0 auto;
-    padding: 50px 0 80px;
+    padding: 50px 30px 80px;
   }
   &__title {
     font-size: 32px;
@@ -40,4 +40,25 @@
     }
   }
 }
-
+@media screen and (max-width: 1000px) {
+  .our-services {
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    &__items {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      &--right {
+        margin-top: 0;
+      }
+    }
+    &__item {
+      &-line {
+        display: none;
+      }
+    }
+  }
+}

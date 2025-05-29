@@ -2,7 +2,7 @@
   &__container {
     max-width: 1520px;
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 60px 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
@@ -41,5 +41,18 @@
     padding: 35px 0;
     background: var(--primary-color);
     color: white;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .footer {
+    &__container {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 30px;
+
+      & > :nth-child(3) {
+        grid-column: 1 / -1;
+      }
+    }
   }
 }
