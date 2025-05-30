@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-header-landing',
@@ -7,6 +7,7 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header-landing.component.scss',
 })
 export class HeaderLandingComponent {
+  @Output() loginClick = new EventEmitter<void>();
   protected goToLogin() {}
   protected readonly isOpen = signal(false);
 

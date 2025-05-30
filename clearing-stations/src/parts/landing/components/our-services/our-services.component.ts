@@ -12,8 +12,10 @@ export class OurServicesComponent {
   protected readonly oddDescriptions = ourServicesDescriptions.filter(
     (item) => item.id % 2 !== 0
   );
-
   protected readonly evenDescriptions = ourServicesDescriptions.filter(
     (item) => item.id % 2 === 0
+  );
+  protected readonly allDescriptions = [...ourServicesDescriptions].sort(
+    (a, b) => a.id - b.id
   );
 }

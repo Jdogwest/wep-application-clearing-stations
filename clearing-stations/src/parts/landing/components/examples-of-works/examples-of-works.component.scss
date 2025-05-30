@@ -67,3 +67,22 @@
     }
   }
 }
+@media screen and (max-width: 800px) {
+  .examples {
+    &__title {
+      padding: 0;
+    }
+    &__list {
+      flex-direction: column;
+      gap: 30px;
+    }
+    &__item {
+      flex-direction: column;
+    }
+    &__image {
+      &-wrapper {
+        width: 100%;
+      }
+    }
+  }
+}

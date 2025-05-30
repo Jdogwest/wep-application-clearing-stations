@@ -1,0 +1,62 @@
+<div class="profile-address">
+  <h2 class="profile-address__title">Адрес</h2>
+  <div class="profile-address__form-wrapper">
+    <form class="profile-address__form" method="POST">
+      <div class="profile-address__form-group">
+        <label class="profile-address__form-label" for="city">Город</label>
+        <input
+          class="profile-address__form-input"
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Тут город пользователя"
+        />
+      </div>
+      <div class="profile-address__form-group">
+        <label class="profile-address__form-label" for="street">Улица</label>
+        <input
+          class="profile-address__form-input"
+          type="text"
+          id="street"
+          name="street"
+          placeholder="Тут улица пользователя"
+        />
+      </div>
+      <div class="profile-address__form-group">
+        <label class="profile-address__form-label" for="house">Дом</label>
+        <input
+          class="profile-address__form-input"
+          type="text"
+          id="house"
+          name="house"
+          placeholder="Тут домпользователя"
+        />
+      </div>
+
+      <div class="profile-address__form-group-buttons">
+        @if (isEdit()) {
+        <input
+          class="profile-address__form-btn profile-address__form-btn--save"
+          type="submit"
+          value="Сохранить"
+        />
+        <button
+          class="profile-address__form-btn profile-address__form-btn--cancel"
+          (click)="disableEdit()"
+          type="button"
+        >
+          Отменить
+        </button>
+        } @else {
+        <button
+          type="button"
+          class="profile-address__form-btn profile-address__form-btn--edit"
+          (click)="enableEdit()"
+        >
+          Редактировать адрес
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

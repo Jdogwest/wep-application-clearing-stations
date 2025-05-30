@@ -1,11 +1,15 @@
 <div class="modal">
   <div class="modal__container">
+    <button
+      (click)="close.emit()"
+      class="modal__button-close"
+      type="button"
+    ></button>
     @if (isLogin()) {
     <div class="login">
       <div class="auth__container">
         <div class="auth__header">
           <h2 class="auth__title">Вход в аккаунт</h2>
-          <button class="auth__button-close" type="button"></button>
         </div>
         <div class="auth__content">
           <form class="auth__form" action="" method="POST">
@@ -57,7 +61,6 @@
       <div class="auth__container">
         <div class="auth__header">
           <h2 class="auth__title">Регистрация</h2>
-          <button class="auth__button-close" type="button"></button>
         </div>
         <div class="auth__content">
           <form class="auth__form" action="" method="POST">

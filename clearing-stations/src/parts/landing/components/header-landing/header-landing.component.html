@@ -33,7 +33,7 @@
         </li>
         @if (isOpen()) {
         <li class="navigation__list-item">
-          <button class="navigation__list-btn" (click)="goToLogin()">
+          <button class="navigation__list-btn" (click)="loginClick.emit()">
             Войти
           </button>
         </li>
@@ -52,7 +52,10 @@
           <p class="phone__order">Заказать звонок</p>
         </div>
       </div>
-      <button class="contacts-and-profile__login-button" (click)="goToLogin()">
+      <button
+        class="contacts-and-profile__login-button"
+        (click)="loginClick.emit()"
+      >
         Войти
       </button>
     </div>

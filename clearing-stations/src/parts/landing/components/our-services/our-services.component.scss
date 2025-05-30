@@ -22,6 +22,9 @@
       margin-top: 150px;
     }
   }
+  &__content--mobile {
+    display: none;
+  }
   &__item {
     display: flex;
     flex-direction: column;
@@ -42,23 +45,21 @@
 }
 @media screen and (max-width: 1000px) {
   .our-services {
-    &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-    &__items {
-      display: flex;
-      flex-direction: column;
-      gap: 50px;
-      &--right {
-        margin-top: 0;
-      }
-    }
     &__item {
       &-line {
-        display: none;
+        height: 1px;
+        width: 50%;
       }
+    }
+    &__items {
+      flex-direction: column;
+      gap: 50px;
+    }
+    &__content--desktop {
+      display: none;
+    }
+    &__content--mobile {
+      display: block;
     }
   }
 }

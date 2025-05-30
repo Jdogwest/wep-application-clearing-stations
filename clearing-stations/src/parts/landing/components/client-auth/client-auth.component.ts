@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-client-auth',
@@ -7,6 +7,7 @@ import { Component, signal } from '@angular/core';
   styleUrl: './client-auth.component.scss',
 })
 export class ClientAuthComponent {
+  @Output() close = new EventEmitter<void>();
   protected readonly isLogin = signal(false);
   goToLogin() {
     this.isLogin.set(true);

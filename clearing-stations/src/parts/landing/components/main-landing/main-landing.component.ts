@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { HeaderLandingComponent } from '../header-landing/header-landing.component';
 import { PreviewBlockComponent } from '../preview-block/preview-block.component';
@@ -27,4 +27,15 @@ import { ClientAuthComponent } from '../client-auth/client-auth.component';
   templateUrl: './main-landing.component.html',
   styleUrl: './main-landing.component.scss',
 })
-export class MainLandingComponent {}
+export class MainLandingComponent {
+  protected readonly showAuth = signal(false);
+  openAuth() {
+    this.showAuth.set(true);
+    document.body.classList.add('modal-open');
+  }
+
+  closeAuth() {
+    this.showAuth.set(false);
+    document.body.classList.remove('modal-open');
+  }
+}

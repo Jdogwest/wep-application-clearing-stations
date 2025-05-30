@@ -1,0 +1,83 @@
+<div class="profile-user">
+  <h2 class="profile-user__title">Личные данныe</h2>
+  <div class="profile-user__form-wrapper">
+    <form class="profile-user__form" method="POST">
+      <div class="profile-user__form-group">
+        <label class="profile-user__form-label" for="surname">Фамилия</label>
+        <input
+          class="profile-user__form-input"
+          type="text"
+          id="surname"
+          name="surname"
+          placeholder="Тут фамилия пользователя"
+        />
+      </div>
+      <div class="profile-user__form-group">
+        <label class="profile-user__form-label" for="name">Имя</label>
+        <input
+          class="profile-user__form-input"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Тут имя пользователя"
+        />
+      </div>
+      <div class="profile-user__form-group">
+        <label class="profile-user__form-label" for="patronymic"
+          >Отчество</label
+        >
+        <input
+          class="profile-user__form-input"
+          type="text"
+          id="patronymic"
+          name="patronymic"
+          placeholder="Тут отчество пользователя"
+        />
+      </div>
+      <div class="profile-user__form-group">
+        <label class="profile-user__form-label" for="email">Email</label>
+        <input
+          class="profile-user__form-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Тут email пользователя"
+        />
+      </div>
+      <div class="profile-user__form-group">
+        <label class="profile-user__form-label" for="email">Телефон</label>
+        <input
+          class="profile-user__form-input"
+          type="text"
+          id="phone"
+          name="phone"
+          placeholder="Тут телефон пользователя"
+        />
+      </div>
+      <div class="profile-user__form-group-buttons">
+        @if (isEdit()) {
+        <input
+          class="profile-user__form-btn profile-user__form-btn--save"
+          type="submit"
+          value="Сохранить"
+        />
+        <button
+          class="profile-user__form-btn profile-user__form-btn--cancel"
+          (click)="disableEdit()"
+          type="button"
+        >
+          Отменить
+        </button>
+        } @else {
+        <button
+          type="button"
+          class="profile-user__form-btn profile-user__form-btn--edit"
+          (click)="enableEdit()"
+        >
+          Редактировать данные
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
