@@ -1,5 +1,6 @@
 class RBWorker:
-    def __init__(self, worker_id: int | None = None,
+    def __init__(self,
+                 worker_id: int | None = None,
                  fio: str | None = None,
                  phone_number: str | None = None,
                  position: str | None = None):
