@@ -11,6 +11,10 @@ from os.path import dirname, abspath
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 from app.database import DATABASE_URL, Base
+from app.clients.models import Client
+from app.workers.models import Worker
+from app.septics.models import Septic
+from app.services.models import Service
 
 config = context.config
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
