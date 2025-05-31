@@ -45,9 +45,9 @@
       }
       &--cancel {
         background-color: #ccc;
-        &:hover {
-          background-color: darken(#ccc, 5%);
-        }
+        // &:hover {
+        //   background-color: darken(#ccc, 5%);
+        // }
       }
     }
   }

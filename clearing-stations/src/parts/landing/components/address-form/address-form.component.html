@@ -1,7 +1,12 @@
 <div class="profile-address">
   <h2 class="profile-address__title">Адрес</h2>
   <div class="profile-address__form-wrapper">
-    <form class="profile-address__form" method="POST">
+    <form
+      class="profile-address__form"
+      method="POST"
+      [formGroup]="addressForm"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="profile-address__form-group">
         <label class="profile-address__form-label" for="city">Город</label>
         <input
@@ -9,6 +14,7 @@
           type="text"
           id="city"
           name="city"
+          [formControl]="addressForm.controls.city"
           placeholder="Тут город пользователя"
         />
       </div>
@@ -19,6 +25,7 @@
           type="text"
           id="street"
           name="street"
+          [formControl]="addressForm.controls.street"
           placeholder="Тут улица пользователя"
         />
       </div>
@@ -29,17 +36,20 @@
           type="text"
           id="house"
           name="house"
-          placeholder="Тут домпользователя"
+          [formControl]="addressForm.controls.house"
+          placeholder="Тут дом пользователя"
         />
       </div>
 
       <div class="profile-address__form-group-buttons">
         @if (isEdit()) {
-        <input
-          class="profile-address__form-btn profile-address__form-btn--save"
+        <button
           type="submit"
-          value="Сохранить"
-        />
+          class="profile-address__form-btn profile-address__form-btn--save"
+          [disabled]="!addressForm.valid"
+        >
+          Сохранить
+        </button>
         <button
           class="profile-address__form-btn profile-address__form-btn--cancel"
           (click)="disableEdit()"

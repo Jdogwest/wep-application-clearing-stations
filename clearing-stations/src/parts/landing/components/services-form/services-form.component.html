@@ -1,0 +1,63 @@
+<div class="services">
+  <h2 class="services__title">Услуги</h2>
+  <div class="services__form-wrapper">
+    <form
+      class="services__form"
+      method="POST"
+      [formGroup]="serviceForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="services__form-group">
+        <label class="services__form-label" for="service">Тип услуги</label>
+        <select
+          class="services__form-select"
+          name="service"
+          id="service"
+          [formControl]="serviceForm.controls.service"
+        >
+          <option class="services__form-option" value="none">Не выбрано</option>
+          @for (service of services; track service.id) {
+          <option class="services__form-option" [value]="service.id">
+            {{ service.title }}
+          </option>
+          }
+        </select>
+      </div>
+      <div class="services__form-group">
+        <label class="services__form-label" for="date">Дата выполнения</label>
+        <p-datepicker
+          [formControl]="serviceForm.controls.date"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          inputId="icondisplay"
+          [disabledDates]="busyDates"
+          placeholder="Не выбрано"
+        ></p-datepicker>
+      </div>
+      <div class="services__form-group">
+        <label class="services__form-label" for="time">Время выполнения</label>
+        <select class="services__form-select" name="time" id="time">
+          <option class="services__form-option" value="none">Не выбрано</option>
+        </select>
+      </div>
+      <div class="services__form-group">
+        <label class="services__form-label" for="comment">Комментарий</label>
+        <textarea
+          class="services__form-textarea"
+          name="comment"
+          id="comment"
+          [formControl]="serviceForm.controls.comment"
+        ></textarea>
+      </div>
+      <div class="services__form-group-buttons">
+        <button
+          type="submit"
+          class="services__form-btn services__form-btn--save"
+          [disabled]="!serviceForm.valid"
+        >
+          Создать заявку
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

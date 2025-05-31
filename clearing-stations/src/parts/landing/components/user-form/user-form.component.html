@@ -1,70 +1,81 @@
 <div class="profile-user">
-  <h2 class="profile-user__title">Личные данныe</h2>
+  <h2 class="profile-user__title">Личные данные</h2>
   <div class="profile-user__form-wrapper">
-    <form class="profile-user__form" method="POST">
+    <form
+      class="profile-user__form"
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()"
+    >
       <div class="profile-user__form-group">
-        <label class="profile-user__form-label" for="surname">Фамилия</label>
+        <label for="surname" class="profile-user__form-label">Фамилия</label>
         <input
-          class="profile-user__form-input"
           type="text"
           id="surname"
-          name="surname"
+          class="profile-user__form-input"
+          [formControl]="userForm.controls.surname"
           placeholder="Тут фамилия пользователя"
         />
       </div>
+
       <div class="profile-user__form-group">
-        <label class="profile-user__form-label" for="name">Имя</label>
+        <label for="name" class="profile-user__form-label">Имя</label>
         <input
-          class="profile-user__form-input"
           type="text"
           id="name"
-          name="name"
+          class="profile-user__form-input"
+          [formControl]="userForm.controls.name"
           placeholder="Тут имя пользователя"
         />
       </div>
+
       <div class="profile-user__form-group">
-        <label class="profile-user__form-label" for="patronymic"
+        <label for="patronymic" class="profile-user__form-label"
           >Отчество</label
         >
         <input
-          class="profile-user__form-input"
           type="text"
           id="patronymic"
-          name="patronymic"
+          class="profile-user__form-input"
+          [formControl]="userForm.controls.patronymic"
           placeholder="Тут отчество пользователя"
         />
       </div>
+
       <div class="profile-user__form-group">
-        <label class="profile-user__form-label" for="email">Email</label>
+        <label for="email" class="profile-user__form-label">Email</label>
         <input
-          class="profile-user__form-input"
           type="email"
           id="email"
-          name="email"
+          class="profile-user__form-input"
+          [formControl]="userForm.controls.email"
           placeholder="Тут email пользователя"
         />
       </div>
+
       <div class="profile-user__form-group">
-        <label class="profile-user__form-label" for="email">Телефон</label>
+        <label for="phone" class="profile-user__form-label">Телефон</label>
         <input
-          class="profile-user__form-input"
           type="text"
           id="phone"
-          name="phone"
+          class="profile-user__form-input"
+          [formControl]="userForm.controls.phone"
           placeholder="Тут телефон пользователя"
         />
       </div>
+
       <div class="profile-user__form-group-buttons">
         @if (isEdit()) {
-        <input
-          class="profile-user__form-btn profile-user__form-btn--save"
-          type="submit"
-          value="Сохранить"
-        />
         <button
+          type="submit"
+          class="profile-user__form-btn profile-user__form-btn--save"
+          [disabled]="!userForm.valid"
+        >
+          Сохранить
+        </button>
+        <button
+          type="button"
           class="profile-user__form-btn profile-user__form-btn--cancel"
           (click)="disableEdit()"
-          type="button"
         >
           Отменить
         </button>

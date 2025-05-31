@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderLandingComponent } from '../header-landing/header-landing.component';
-import { FooterLandingComponent } from '../footer-landing/footer-landing.component';
-import { ProfileUserComponent } from '../profile-user/profile-user.component';
-import { ProfileAddressComponent } from '../profile-address/profile-address.component';
+import { UserFormComponent } from '../user-form/user-form.component';
+import { AddressFormComponent } from '../address-form/address-form.component';
 
 @Component({
   selector: 'app-profile-landing',
   imports: [
-    HeaderLandingComponent,
-    FooterLandingComponent,
-    ProfileUserComponent,
-    ProfileAddressComponent,
+    UserFormComponent,
+    AddressFormComponent,
   ],
   templateUrl: './profile-landing.component.html',
   styleUrl: './profile-landing.component.scss',
