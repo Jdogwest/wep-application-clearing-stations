@@ -11,6 +11,7 @@ class Septic(Base):
     owner_id: Mapped[int] = mapped_column(Integer, ForeignKey("clients.id"))
 
     owner = relationship("Client", back_populates="septics")
+    requests = relationship("Request", back_populates="septics")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "

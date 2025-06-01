@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, relationship
 from app.database import Base, int_pk
 
 
@@ -7,6 +7,18 @@ class Worker(Base):
     fio: Mapped[str]
     phone_number: Mapped[str]
     position: Mapped[str]
+
+    brigadier_relations = relationship(
+        "WorkmanBrigadier",
+        foreign_keys="WorkmanBrigadier.brigadier_id",
+        back_populates="brigadier"
+    )
+
+    workman_relations = relationship(
+        "WorkmanBrigadier",
+        foreign_keys="WorkmanBrigadier.workman_id",
+        back_populates="workman"
+    )
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "

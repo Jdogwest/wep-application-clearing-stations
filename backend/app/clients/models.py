@@ -9,6 +9,7 @@ class Client(Base):
     email: Mapped[str]
 
     septics = relationship("Septic", back_populates="owner")
+    requests = relationship("Request", back_populates="client")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
