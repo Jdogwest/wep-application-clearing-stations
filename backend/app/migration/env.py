@@ -11,8 +11,7 @@ from os.path import dirname, abspath
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 from app.database import DATABASE_URL, Base
-from app.clients.models import Client
-from app.workers.models import Worker
+from app.users.models import User
 from app.septics.models import Septic
 from app.services.models import Service
 from app.workman_brigadiers.models import WorkmanBrigadier

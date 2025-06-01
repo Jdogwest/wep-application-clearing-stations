@@ -1,9 +1,10 @@
-class RBClient:
-    def __init__(self, client_id: int | None = None,
+class RBUser:
+    def __init__(self,
+                 id: int | None = None,
                  fio: str | None = None,
                  phone_number: str | None = None,
                  email: str | None = None):
-        self.id = client_id
+        self.id = id
         self.fio = fio
         self.phone_number = phone_number
         self.email = email

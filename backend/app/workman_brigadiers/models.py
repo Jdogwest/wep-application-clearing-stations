@@ -4,11 +4,11 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 
 class WorkmanBrigadier(Base):
-    brigadier_id: Mapped[int] = mapped_column(ForeignKey('workers.id'), primary_key=True)
-    workman_id: Mapped[int] = mapped_column(ForeignKey('workers.id'), primary_key=True)
+    brigadier_id: Mapped[int] = mapped_column(ForeignKey('users.id'), primary_key=True)
+    workman_id: Mapped[int] = mapped_column(ForeignKey('users.id'), primary_key=True)
 
-    brigadier = relationship("Worker", foreign_keys=[brigadier_id])
-    workman = relationship("Worker", foreign_keys=[workman_id])
+    brigadier = relationship("User", foreign_keys=[brigadier_id])
+    workman = relationship("User", foreign_keys=[workman_id])
 
     def __str__(self):
         return (f"{self.__class__.__name__}(workman_id={self.workman_id}, "

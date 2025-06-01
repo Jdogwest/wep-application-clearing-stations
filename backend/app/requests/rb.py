@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-class RBSeptic:
+class RBRequest:
     def __init__(self, id: int | None = None,
                  created_at: datetime | None = None,
                  client_id: int | None = None,

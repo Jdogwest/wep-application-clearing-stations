@@ -8,9 +8,9 @@ class Septic(Base):
     address: Mapped[str]
     volume: Mapped[int]
     model: Mapped[str]
-    owner_id: Mapped[int] = mapped_column(Integer, ForeignKey("clients.id"))
+    owner_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("Client", back_populates="septics")
+    owner = relationship("User", back_populates="septics")
     requests = relationship("Request", back_populates="septics")
 
     def __str__(self):

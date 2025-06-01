@@ -6,15 +6,15 @@ from app.database import Base, int_pk, created_at
 class Request(Base):
     id: Mapped[int_pk]
     created_at: Mapped[created_at]
-    client_id: Mapped[int] = mapped_column(Integer, ForeignKey("clients.id"))
+    client_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
     contract_number: Mapped[str]
     status: Mapped[str]
     summary: Mapped[int]
     septic_id: Mapped[int] = mapped_column(Integer, ForeignKey("septics.id"))
 
 
-    client = relationship("Client", back_populates="requests")
-    septic = relationship("Septic", back_populates="requests")
+    client = relationship("User", back_populates="requests")
+    septics = relationship("Septic", back_populates="requests")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "

@@ -1,6 +1,6 @@
 from app.database import Base, int_pk
 from sqlalchemy import Numeric
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 import decimal
 
 
@@ -10,6 +10,8 @@ class Service(Base):
     price: Mapped[decimal.Decimal] = mapped_column(Numeric(10, 2))
     description: Mapped[str]
     time_to_complete: Mapped[float]
+
+    requests = relationship("RequestService", back_populates="service")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
