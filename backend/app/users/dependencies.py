@@ -36,13 +36,14 @@ def check_token(payload = Depends(decode_token)):
 
 async def get_current_user(payload = Depends(check_token)):
     user_id = payload.get('sub')
+    
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Не найден ID пользователя')
-
     user = await UserDAO.find_one_or_none_by_id(int(user_id))
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User not found')
-
+    
+    user.__dict__.pop("password", None)
     return user
 
 

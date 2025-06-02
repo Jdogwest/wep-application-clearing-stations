@@ -6,7 +6,7 @@ from app.database import Base, int_pk
 class User(Base):
     id: Mapped[int_pk]
     fio: Mapped[str]
-    phone_number: Mapped[str]
+    phone_number: Mapped[str] = mapped_column(String, nullable=True)
     email: Mapped[str]
     password: Mapped[str]
     role: Mapped[str] = mapped_column(String, default='client', server_default=text("'client'"), nullable=False)

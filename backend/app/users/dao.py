@@ -11,6 +11,11 @@ class UserDAO(BaseDAO):
         if user:
             user.__dict__.pop("password", None)
         return user
+    
+    @classmethod
+    async def find_one_or_none_with_pass(cls, **filter_by):
+        user = await super().find_one_or_none(**filter_by)
+        return user
 
     @classmethod
     async def find_all(cls, **filter_by):

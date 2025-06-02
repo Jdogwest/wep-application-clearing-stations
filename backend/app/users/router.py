@@ -16,15 +16,15 @@ async def get_all_users(request_body: RBUser = Depends()) -> list[SUser]:
     return await UserDAO.find_all(**request_body.to_dict())
 
 
-@router.get("/{id}", summary="Получить одного пользователя по должности")
-async def get_user_by_id(user_position: str) -> SUser | None:
-    rez = await UserDAO.find_one_or_none_by_id(user_position)
+@router.get("/{id}", summary="Получить одного пользователя по id")
+async def get_user_by_id(user_id: str) -> SUser | None:
+    rez = await UserDAO.find_one_or_none_by_id(user_id)
     if rez is None:
-        return {'message': f'Пользователь с должностью {user_position} не найден!'}
+        return {'message': f'Пользователь с должностью {user_id} не найден!'}
     return rez
 
 
-@router.post("/register/")
+@router.post("/auth/register/")
 async def register_user(user_data: SUserRegister) -> dict:
     user = await UserDAO.find_one_or_none(email=user_data.email)
     if user:
@@ -38,14 +38,14 @@ async def register_user(user_data: SUserRegister) -> dict:
     return {'message': 'Вы успешно зарегистрированы!'}
 
 
-@router.post("/login/")
+@router.post("/auth/login")
 async def auth_user(response: Response, user_data: SUserAuth):
     check = await authenticate_user(email=user_data.email, password=user_data.password)
     if check is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail='Неверная почта или пароль')
     access_token = create_access_token({"sub": str(check.id)})
-    response.set_cookie(key="users_access_token", value=access_token, httponly=True)
+    response.set_cookie(key="users_access_token", value=access_token, httponly=True, samesite="none", secure=True)
     return {'access_token': access_token, 'refresh_token': None}
 
 
