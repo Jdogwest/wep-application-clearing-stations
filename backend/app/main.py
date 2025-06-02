@@ -1,4 +1,8 @@
 from fastapi import FastAPI 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+from app.config import settings
 from app.users.router import router as router_users
 from app.septics.router import router as router_septics
 from app.services.router import router as router_services
@@ -8,6 +12,14 @@ from app.request_services.router import router as router_request_services
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=settings.ALLOWED_METHODS,
+    allow_headers=settings.ALLOWED_HEADERS,
+)
 
 app.include_router(router_users)
 app.include_router(router_septics)

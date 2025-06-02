@@ -16,18 +16,25 @@ def get_token(request: Request):
     return token
 
 
-async def get_current_user(token: str = Depends(get_token)):
+def decode_token(token: str = Depends(get_token)):
     try:
         auth_data = get_auth_data()
         payload = jwt.decode(token, auth_data['secret_key'], algorithms=[auth_data['algorithm']])
+        return payload
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Токен не валидный!')
 
+
+def check_token(payload = Depends(decode_token)):
     expire = payload.get('exp')
     expire_time = datetime.fromtimestamp(int(expire), tz=timezone.utc)
     if (not expire) or (expire_time < datetime.now(timezone.utc)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Токен истек')
 
+    return payload
+
+
+async def get_current_user(payload = Depends(check_token)):
     user_id = payload.get('sub')
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Не найден ID пользователя')
@@ -38,7 +45,8 @@ async def get_current_user(token: str = Depends(get_token)):
 
     return user
 
+
 async def get_current_admin_user(current_user: User = Depends(get_current_user)):
-    if current_user.is_admin:
+    if current_user.role == "admin":
         return current_user
     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Недостаточно прав!')

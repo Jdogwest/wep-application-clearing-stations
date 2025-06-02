@@ -1,4 +1,4 @@
-from sqlalchemy import text
+from sqlalchemy import String, text
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 from app.database import Base, int_pk
 
@@ -9,13 +9,7 @@ class User(Base):
     phone_number: Mapped[str]
     email: Mapped[str]
     password: Mapped[str]
-
-    is_user: Mapped[bool] = mapped_column(default=True, server_default=text('true'), nullable=False)
-    is_client: Mapped[bool] = mapped_column(default=False, server_default=text('false'), nullable=False)
-    is_manager: Mapped[bool] = mapped_column(default=False, server_default=text('false'), nullable=False)
-    is_brigadier: Mapped[bool] = mapped_column(default=False, server_default=text('false'), nullable=False)
-    is_workman: Mapped[bool] = mapped_column(default=False, server_default=text('false'), nullable=False)
-    is_admin: Mapped[bool] = mapped_column(default=False, server_default=text('false'), nullable=False)
+    role: Mapped[str] = mapped_column(String, default='client', server_default=text("'client'"), nullable=False)
 
     septics = relationship("Septic", back_populates="owner")
     requests = relationship("Request", back_populates="client")
