@@ -1,0 +1,45 @@
+<div class="requests-landing">
+  <div class="requests-landing__header">
+    <h1 class="requests-landing__title">Заявки</h1>
+    <select class="requests-landing__select" name="sort" id="sort">
+      <option value="all">Все</option>
+      <option value="new">Новые</option>
+      <option value="old">Старые</option>
+      <option value="completed">Завершенные</option>
+    </select>
+  </div>
+  <div class="requests-landing__content">
+    <div class="requests-landing__list">
+      <div class="requests-landing__item new">
+        <h2 class="requests-landing__item-title">Заявка №1</h2>
+        <div class="requests-landing__item-content">
+          <div class="requests-landing__item-info">
+            <h3 class="requests-landing__item-info-title">
+              Данные пользователя
+            </h3>
+            <p class="requests-landing__item-info-text">Фамилия: Ежиков</p>
+            <p class="requests-landing__item-info-text">Имя: Константин</p>
+            <p class="requests-landing__item-info-text">Отчество: Не указано</p>
+          </div>
+          <div class="requests-landing__item-info">
+            <h3 class="requests-landing__item-info-title">Услуги</h3>
+            <p class="requests-landing__item-info-text">Тип услуги: ывафыаы</p>
+            <p class="requests-landing__item-info-text">
+              Дата выполнения: 01.01.2025
+            </p>
+            <p class="requests-landing__item-info-text">
+              Время выполения: 16:00
+            </p>
+          </div>
+        </div>
+        <div>
+          <a
+            [routerLink]="'/admin/request-edit/1'"
+            class="requests-landing__item-button"
+            >Подробнее</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

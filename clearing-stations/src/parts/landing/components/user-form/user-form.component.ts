@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { UserFormData } from '../../interfaces/userForm.interface';
+import { UserFormData } from '../../interfaces/user-form.interface';
 
 type FormControlsOf<T> = {
   [K in keyof T]: FormControl<T[K]>;

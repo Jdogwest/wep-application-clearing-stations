@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ServicesFormData } from '../../interfaces/servicesForm.interface';
+import { ServicesFormData } from '../../interfaces/services-form.interface';
 import { ourServicesDescriptions } from '../../constants/our-services-descriptions';
 import { DatePickerModule } from 'primeng/datepicker';
 
