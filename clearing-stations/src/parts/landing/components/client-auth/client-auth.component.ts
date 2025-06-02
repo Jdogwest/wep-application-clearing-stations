@@ -10,6 +10,7 @@ import {
 import { finalize } from 'rxjs';
 import { registrationFormInterface } from '../../interfaces/auth-form.interface';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-client-auth',
@@ -26,6 +27,7 @@ export class ClientAuthComponent {
 
   protected readonly loginForm = this.getNewLoginFormGroup();
   protected readonly registrationForm = this.getNewRegistrationFormGroup();
+  private notificationService = inject(NotificationService);
 
   protected login() {
     this.authService
@@ -39,7 +41,14 @@ export class ClientAuthComponent {
         })
       )
       .subscribe({
-        error: (err) => console.log(err),
+        next: (res: any) => {
+          this.notificationService.success(
+            res?.detail || 'Вход выполнен успешно'
+          );
+        },
+        error: (err) => {
+          this.notificationService.error(err?.error?.detail || 'Ошибка входа');
+        },
       });
   }
 
@@ -57,7 +66,16 @@ export class ClientAuthComponent {
         })
       )
       .subscribe({
-        error: (err) => console.log(err),
+        next: (res: any) => {
+          this.notificationService.success(
+            res?.detail || 'Регистрация прошла успешно'
+          );
+        },
+        error: (err) => {
+          this.notificationService.error(
+            err?.error?.detail || 'Ошибка регистрации'
+          );
+        },
       });
   }
 

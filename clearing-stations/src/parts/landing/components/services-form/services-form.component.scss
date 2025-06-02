@@ -82,3 +82,14 @@
 :host ::ng-deep .p-datepicker-input-icon-container {
   color: #000000 !important;
 }
+:host ::ng-deep .p-datepicker-day-selected {
+  background-color: var(--primary-color) !important;
+  border-radius: 0 !important;
+}
+
+:host ::ng-deep .p-datepicker-day {
+  border-radius: 0 !important;
+}
+:host ::ng-deep .p-button-text {
+  color: #000000 !important;
+}

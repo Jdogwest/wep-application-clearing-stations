@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NotificationComponent } from '../landing/components/notification/notification.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule],
+  imports: [RouterModule, NotificationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
