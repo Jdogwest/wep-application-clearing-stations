@@ -8,19 +8,66 @@
     >
       <div class="services__form-group">
         <label class="services__form-label" for="service">Тип услуги</label>
-        <select
-          class="services__form-select"
-          name="service"
-          id="service"
-          [formControl]="serviceForm.controls.service"
-        >
-          <option class="services__form-option" value="none">Не выбрано</option>
-          @for (service of services; track service.id) {
-          <option class="services__form-option" [value]="service.id">
-            {{ service.title }}
-          </option>
+        <div class="services__form-selected-list">
+          @for (service of selectedService; let i = $index; track service) {
+          <div class="services__form-selected">
+            <p class="services__form-selected-title">{{ service }}</p>
+            <div class="services__form-selected-controls">
+              <div class="services__form-selected-quantity">
+                <button class="services__form-btn--decrease">-</button>
+                <p class="services__form-selected-quantity-value">1</p>
+                <button class="services__form-btn--increase">+</button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="services__form-btn--remove"
+              (click)="removeService(i)"
+              aria-label="Удалить услугу"
+            >
+              ×
+            </button>
+          </div>
           }
-        </select>
+        </div>
+        <div class="services__form-add-row">
+          <ng-container *ngIf="showSelect">
+            <select
+              class="services__form-select"
+              name="service"
+              id="service"
+              [formControl]="selectedServiceId"
+            >
+              <option class="services__form-option" value="none">
+                Не выбрано
+              </option>
+              @for (service of services; track service.id) {
+              <option class="services__form-option" [value]="service.id">
+                {{ service.title }}
+              </option>
+              }
+            </select>
+            <button
+              type="button"
+              class="services__form-btn services__form-btn--add"
+              (click)="addService()"
+              [disabled]="selectedServiceId.value === 'none'"
+            >
+              Добавить
+            </button>
+          </ng-container>
+          <button
+            *ngIf="
+              !showSelect &&
+              (serviceForm.controls.service.value?.length ?? 0) > 0
+            "
+            type="button"
+            class="services__form-btn services__form-btn--add"
+            (click)="showAddSelect()"
+          >
+            Добавить еще
+          </button>
+        </div>
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="date">Дата выполнения</label>

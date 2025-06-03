@@ -9,6 +9,11 @@
   }
 
   &__form {
+    &-add-row {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
     &-group {
       display: flex;
       flex-direction: column;
@@ -26,6 +31,30 @@
       background: transparent;
       border: 1px solid #c7c7ce;
       cursor: pointer;
+    }
+    &-selected {
+      display: grid;
+      grid-template-columns: 10fr 1fr 1fr;
+      gap: 30px;
+      border-top: 1px solid #c7c7ce;
+      padding: 10px 0;
+      align-items: center;
+      &-title {
+        font-size: 18px;
+      }
+      &-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &-quantity {
+        background: #d1d1d1;
+        display: flex;
+        align-items: center;
+        &-value {
+          padding: 10px;
+        }
+      }
     }
     &-option {
       appearance: none;
@@ -57,9 +86,28 @@
       border: none;
       padding: 10px 20px;
       cursor: pointer;
-      &--save {
+      width: fit-content;
+      &--save,
+      &--add {
         background-color: var(--primary-color);
         color: #fff;
+      }
+      &--remove {
+        background: transparent;
+        font-size: 24px;
+        border: none;
+      }
+      &--decrease,
+      &--increase {
+        background: transparent;
+        border: none;
+        padding: 8px 15px;
+        font-size: 20px;
+        transition: 0.3s;
+        &:hover {
+          background: #b4b4b4;
+          transition: 0.3s;
+        }
       }
     }
   }

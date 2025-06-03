@@ -19,6 +19,8 @@ export class AddressFormComponent {
     city: new FormControl<string>(''),
     street: new FormControl<string>(''),
     house: new FormControl<string>(''),
+    septicModel: new FormControl<string>(''),
+    septicVolume: new FormControl<number | null>(null),
   });
 
   ngOnInit() {
