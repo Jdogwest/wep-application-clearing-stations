@@ -5,7 +5,9 @@ from app.database import Base, int_pk
 
 class User(Base):
     id: Mapped[int_pk]
-    fio: Mapped[str]
+    name: Mapped[str]
+    surname: Mapped[str]
+    patronymic: Mapped[str] = mapped_column(String, nullable=True)
     phone_number: Mapped[str] = mapped_column(String, nullable=True)
     email: Mapped[str]
     password: Mapped[str]
@@ -28,7 +30,9 @@ class User(Base):
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
-                f"fio={self.fio!r},"
+                f"name={self.name!r},"
+                f"surname={self.surname!r},"
+                f"patronymic={self.patronymic!r},"
                 f"phone_number={self.phone_number!r}),"
                 f"email={self.email!r}),"
                 f"role={self.role!r})")
@@ -39,7 +43,9 @@ class User(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "fio": self.fio,
+            "name": self.name,
+            "surname": self.surname,
+            "patronymic": self.patronymic,
             "phone_number": self.phone_number,
             "email": self.email,
             "role": self.role

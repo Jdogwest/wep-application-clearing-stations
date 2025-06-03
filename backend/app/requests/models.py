@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.database import Base, int_pk, created_at
 
@@ -7,7 +7,7 @@ class Request(Base):
     id: Mapped[int_pk]
     created_at: Mapped[created_at]
     client_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
-    contract_number: Mapped[str]
+    contract_number: Mapped[str] = mapped_column(String, nullable=True)
     status: Mapped[str]
     summary: Mapped[int]
     septic_id: Mapped[int] = mapped_column(Integer, ForeignKey("septics.id"))
@@ -37,4 +37,4 @@ class Request(Base):
             "status": self.status,
             "summary": self.summary,
             "septic_id": self.septic_id
-        }
+        } 
