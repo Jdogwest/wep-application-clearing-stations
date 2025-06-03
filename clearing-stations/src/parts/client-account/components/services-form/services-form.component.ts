@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ServicesFormData } from '../../interfaces/services-form.interface';
-import { ourServicesDescriptions } from '../../constants/our-services-descriptions';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 import { DatePickerModule } from 'primeng/datepicker';
+import { ourServicesDescriptions } from '../../constants/our-services-descriptions';
+import { ServicesFormData } from '../../interfaces/services-form.interface';
 
 type FormControlsOf<T> = {
   [K in keyof T]: FormControl<T[K]>;

@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { HeaderLandingComponent } from '../header-landing/header-landing.component';
-import { FooterLandingComponent } from '../footer-landing/footer-landing.component';
-import { ClientAuthComponent } from '../client-auth/client-auth.component';
 import { RouterOutlet } from '@angular/router';
+import { ClientAuthComponent } from '../../../client-account/components/client-auth/client-auth.component';
+import { FooterLandingComponent } from '../footer-landing/footer-landing.component';
+import { HeaderLandingComponent } from '../header-landing/header-landing.component';
 
 @Component({
   selector: 'app-landing-layout',

@@ -8,9 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { AuthService } from '../../../landing/services/auth.service';
+import { NotificationService } from '../../../landing/services/notification.service';
 import { registrationFormInterface } from '../../interfaces/auth-form.interface';
-import { AuthService } from '../../services/auth.service';
-import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-client-auth',
