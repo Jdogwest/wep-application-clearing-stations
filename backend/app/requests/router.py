@@ -4,7 +4,7 @@ from app.requests.schemas import SRequest
 from app.requests.rb import RBRequest
 
 
-router = APIRouter(prefix='/requests', tags=['Работа с септиками'])
+router = APIRouter(prefix='/requests', tags=['Работа с запросами'])
 
 
 @router.get("/", summary="Получить все запросы", response_model=list[SRequest])

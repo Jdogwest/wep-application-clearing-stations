@@ -18,3 +18,26 @@ class SepticDAO(BaseDAO):
                 return None
             
             return result.scalars().all()
+            
+
+    @classmethod
+    async def edit_septic(cls, user_id: int, data: dict):
+        async with async_session_maker() as session:
+            result = await session.execute(select(cls.model).where(cls.model.owner_id == user_id))
+            septic = result.scalar_one_or_none()
+            if (not septic):
+                await SepticDAO.add(owner_id=user_id, **data)
+
+                await session.commit()
+
+                result = await session.execute(select(cls.model).where(cls.model.owner_id == user_id))
+                septic = result.scalar_one_or_none()
+                return septic
+
+            for key, value in data.items():
+                setattr(septic, key, value)
+
+            await session.commit()
+            await session.refresh(septic)
+
+            return septic

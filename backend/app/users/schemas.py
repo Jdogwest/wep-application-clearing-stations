@@ -39,3 +39,14 @@ class SUserRegister(BaseModel):
 class SUserAuth(BaseModel):
     email: EmailStr = Field(..., description="Электронная почта")
     password: str = Field(..., min_length=5, max_length=50, description="Пароль, от 5 до 50 знаков")
+
+
+class SUserEdit(BaseModel):
+    fio: str = Field(..., min_length=3, max_length=50, description="FIO, от 3 до 50 символов")
+    phone_number: str = Field(..., description="Номер телефона в международном формате, начинающийся с '+'")
+
+    @field_validator("phone_number")
+    def validate_phone_number(cls, value):
+        if not re.match(r'^\+\d{1,15}$', value):
+            raise ValueError('Номер телефона должен начинаться с "+" и содержать от 1 до 15 цифр')
+        return value
