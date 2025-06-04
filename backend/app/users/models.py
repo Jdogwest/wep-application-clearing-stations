@@ -7,9 +7,9 @@ class User(Base):
     id: Mapped[int_pk]
     name: Mapped[str]
     surname: Mapped[str]
-    patronymic: Mapped[str] = mapped_column(String, nullable=True)
-    phone_number: Mapped[str] = mapped_column(String, nullable=True)
-    email: Mapped[str]
+    patronymic: Mapped[str | None] = mapped_column(String, nullable=True)
+    phone_number: Mapped[str | None] = mapped_column(String, nullable=True)
+    email: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     password: Mapped[str]
     role: Mapped[str] = mapped_column(String, default='client', server_default=text("'client'"), nullable=False)
 

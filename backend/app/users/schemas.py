@@ -8,7 +8,7 @@ class SUser(BaseModel):
     id: int
     name: str = Field(..., min_length=3, max_length=50, description="Имя клиента, от 3 до 50 символов")
     surname: str = Field(..., min_length=3, max_length=50, description="Фамилия клиента, от 3 до 50 символов")
-    patronymic: str = Field(..., min_length=3, max_length=50, required=False, description="Отчество клиента, от 3 до 50 символов")
+    patronymic: str = Field(default=None, min_length=3, max_length=50, description="Отчество клиента, от 3 до 50 символов")
     phone_number: str = Field(..., description="Номер телефона в международном формате, начинающийся с '+'")
     email: str = Field(..., description="Электронная почта клиента")
     role: str = Field(..., min_length=1, max_length=50, description="роль, от 1 до 50 символов")
@@ -31,7 +31,7 @@ class SUserRegister(BaseModel):
     password: str = Field(..., min_length=5, max_length=50, description="Пароль, от 5 до 50 знаков")
     name: str = Field(..., min_length=3, max_length=50, description="Имя клиента, от 3 до 50 символов")
     surname: str = Field(..., min_length=3, max_length=50, description="Фамилия клиента, от 3 до 50 символов")
-    patronymic: str = Field(..., min_length=3, max_length=50, required=False, description="Отчество клиента, от 3 до 50 символов")
+    patronymic: str = Field(default=None, min_length=3, max_length=50, description="Отчество клиента, от 3 до 50 символов")
     
     @field_validator("email")
     def validate_email(cls, value):
@@ -48,7 +48,7 @@ class SUserAuth(BaseModel):
 class SUserEdit(BaseModel):
     name: str = Field(..., min_length=3, max_length=50, description="Имя клиента, от 3 до 50 символов")
     surname: str = Field(..., min_length=3, max_length=50, description="Фамилия клиента, от 3 до 50 символов")
-    patronymic: str = Field(..., min_length=3, max_length=50, required=False, description="Отчество клиента, от 3 до 50 символов")
+    patronymic: str = Field(default=None, min_length=3, max_length=50, description="Отчество клиента, от 3 до 50 символов")
     phone_number: str = Field(..., description="Номер телефона в международном формате, начинающийся с '+'")
 
     @field_validator("phone_number")
