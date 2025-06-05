@@ -1,3 +1,6 @@
+@use "variables" as *;
+@use "mixins" as *;
+
 .header {
   padding: 15px 30px;
   &__container {
@@ -5,25 +8,14 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   &__logo {
     display: flex;
-    align-items: center;
-    &-block {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    gap: 10px;
+    &-title {
+      font-size: 16px;
     }
-  }
-  &__navigation {
-    display: flex;
-    align-items: center;
-  }
-
-  &__contacts-and-profile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   &__hamburger-btn {
     background: none;
@@ -40,7 +32,6 @@
       background-color: black;
       position: relative;
       transition: 0.3s ease;
-
       &:before,
       &:after {
         content: "";
@@ -51,73 +42,25 @@
         transition: 0.3s ease;
         left: 0;
       }
-
       &:before {
         top: -8px;
       }
-
       &:after {
         top: 8px;
       }
     }
   }
-}
-
-.logo-block {
-  &__image {
-    width: 80px;
-    height: 60px;
-  }
-  &__title {
-    width: 107px;
-    font-size: 12px;
-    line-height: 11px;
-    margin: 0;
-    margin-left: 10px;
-    color: #5b4a4a;
-  }
-}
-
-.contacts-and-profile {
-  &__phone {
+  &__item {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    &:last-child {
+      display: flex;
+      gap: 20px;
+    }
   }
-  &__login-button {
-    background-color: #5b4a4a;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
-    margin-left: 30px;
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    font-size: 20px;
-    line-height: 24px;
-  }
-}
-
-.phone {
-  &__wrapper {
-    margin-left: 10px;
-  }
-  &__number {
-    margin: 0;
-    font-weight: bold;
-  }
-  &__order {
-    margin: 0;
-    text-align: center;
-    font-size: 14px;
-    color: #5b4a4a;
-  }
-}
-
-.navigation {
   &__list {
+    list-style: none;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
     gap: 15px;
     &-link {
       text-decoration: none;
@@ -128,9 +71,36 @@
         opacity: 0.5;
       }
     }
-    &-btn {
-      display: none;
+    &-button {
+      font-size: 18px;
+      border: none;
+      background: transparent;
+      transition: 0.3s;
+      &:hover {
+        transition: 0.3s;
+        opacity: 0.5;
+      }
     }
+  }
+  &__contacts {
+    display: flex;
+    gap: 10px;
+    &-block {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    &-number {
+      font-weight: bold;
+    }
+    &-order {
+      text-align: center;
+      font-size: 14px;
+      color: #5b4a4a;
+    }
+  }
+  &__button {
+    @include button();
   }
 }
 @media screen and (max-width: 1150px) {
@@ -144,37 +114,29 @@
       background: white;
       box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
     }
-    &__navigation,
-    &__contacts-and-profile {
-      display: none;
-    }
-    &__navigation--open {
-      display: flex;
-      padding: 20px;
-    }
     &__hamburger-btn {
       display: block;
     }
-    &__logo {
+    &__item:first-child {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 10px 30px;
+      padding: 15px 30px;
     }
-  }
-  .navigation {
+    &__item,
+    &__item:last-child {
+      display: none;
+    }
+    &__item--open,
+    &__item--open:last-child {
+      display: block;
+      margin-bottom: 20px;
+    }
     &__list {
-      width: 100%;
+      display: flex;
+      gap: 20px;
       flex-direction: column;
-      justify-content: center;
-      &-btn {
-        display: block;
-        padding: 10px 30px;
-        border: none;
-        background: var(--primary-color);
-        color: white;
-        font-size: 18px;
-      }
+      align-items: center;
     }
   }
 }

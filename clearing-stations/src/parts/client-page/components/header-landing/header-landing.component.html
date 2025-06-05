@@ -1,63 +1,73 @@
 <header class="header">
   <div class="header__container">
-    <div class="header__logo">
-      <div class="header__logo-block">
+    <div class="header__item">
+      <div class="header__logo">
         <img
           src="assets/img/logo.png"
           alt="Логотип"
-          class="logo-block__image"
+          class="header__logo-image"
         />
-        <p class="logo-block__title">Обслуживание частых очистных сооружений</p>
+        <p class="header__logo-title">
+          Обслуживание<br />частых очистных<br />ооружений
+        </p>
       </div>
       <button (click)="toggleMenu()" class="header__hamburger-btn">
         <span></span>
       </button>
     </div>
 
-    <nav class="header__navigation" [class.header__navigation--open]="isOpen()">
-      <ul class="navigation__list">
-        <li class="navigation__list-item">
-          <a class="navigation__list-link" href="/">Главная</a>
+    <nav class="header__item" [class.header__item--open]="isOpen()">
+      <ul class="header__list">
+        <li class="header__list-item">
+          <a class="header__list-link" href="/">Главная</a>
         </li>
-        <li class="navigation__list-item">
-          <a class="navigation__list-link" href="#why-us">О нас</a>
+        <li class="header__list-item">
+          <a class="header__list-link" href="#why-us">О нас</a>
         </li>
-        <li class="navigation__list-item">
-          <a class="navigation__list-link" href="#our-services">Услуги</a>
+        <li class="header__list-item">
+          <a class="header__list-link" href="#our-services">Услуги</a>
         </li>
-        <li class="navigation__list-item">
-          <a class="navigation__list-link" href="#examples">Примеры работ</a>
+        <li class="header__list-item">
+          <a class="header__list-link" href="#examples">Примеры работ</a>
         </li>
-        <li class="navigation__list-item">
-          <a class="navigation__list-link" href="#contacts">Контакты</a>
+        <li class="header__list-item">
+          <a class="header__list-link" href="#contacts">Контакты</a>
         </li>
-        @if (isOpen()) {
-        <li class="navigation__list-item">
-          <button class="navigation__list-btn" (click)="loginClick.emit()">
-            Войти
-          </button>
-        </li>
-        }
       </ul>
     </nav>
-    <div class="header__contacts-and-profile">
-      <div class="contacts-and-profile__phone">
-        <img
-          src="assets/svg/PhoneCalling.svg"
-          alt="Иконка телефона"
-          class="phone__icon"
-        />
-        <div class="phone__wrapper">
-          <p class="phone__number">+7 (800) 555-35-35</p>
-          <p class="phone__order">Связаться с нами</p>
+    <div class="header__item" [class.header__item--open]="isOpen()">
+      @if (!isLoggedIn()) {
+      <div class="header__contacts-block">
+        <div class="header__contacts">
+          <img
+            src="assets/svg/PhoneCalling.svg"
+            alt="Иконка телефона"
+            class="header__contacts-icon"
+          />
+          <div class="header__contacts-wrapper">
+            <p class="header__contacts-number">+7 (800) 555-35-35</p>
+            <p class="header__contacts-order">Связаться с нами</p>
+          </div>
         </div>
+        <button class="header__button" (click)="loginClick.emit()">
+          Войти
+        </button>
       </div>
-      <button
-        class="contacts-and-profile__login-button"
-        (click)="loginClick.emit()"
-      >
-        Войти
-      </button>
+      } @else {
+      <ul class="header__list">
+        <li class="header__list-item">
+          <a class="header__list-link" [routerLink]="'create-application'"
+            >Создать заявку</a
+          >
+        </li>
+        <li class="header__list-item">
+          <a class="header__list-link" [routerLink]="'profile'">Профиль</a>
+        </li>
+        <li class="header__list-item">
+          <button class="header__list-button" (click)="logout()">Выход</button>
+        </li>
+      </ul>
+      }
     </div>
   </div>
 </header>
