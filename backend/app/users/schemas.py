@@ -2,6 +2,8 @@ import re
 from pydantic import BaseModel, EmailStr, Field, field_validator, ConfigDict
 from typing import Optional
 
+from app.septics.schemas import SSepticEdit
+
 class SUser(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
@@ -58,3 +60,12 @@ class SUserEdit(BaseModel):
         if not re.match(r'^\+\d{1,15}$', value):
             raise ValueError('Номер телефона должен начинаться с "+" и содержать от 1 до 15 цифр')
         return value
+    
+class SUserEditFull(BaseModel):
+    client: SUserEdit
+    septic: SSepticEdit
+
+class SUserEditFullAndRole(BaseModel):
+    client: SUserEdit
+    septic: SSepticEdit
+    new_role: str
