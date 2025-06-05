@@ -13,6 +13,8 @@ class UserDAO(BaseDAO):
         user = await super().find_one_or_none(**filter_by)
         if user:
             user.__dict__.pop("password", None)
+
+        
         return user
     
     @classmethod

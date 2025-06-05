@@ -3,7 +3,7 @@ from app.users.dao import UserDAO
 from app.users.schemas import SUser, SUserEdit
 from app.users.rb import RBUser
 from app.users.models import User
-from app.users.dependencies import get_current_admin_user, get_current_user
+from app.users.dependencies import get_current_admin_user, get_current_manager_user, get_current_user
 
 
 router = APIRouter(prefix='/users', tags=['Работа с пользователями'])
@@ -14,11 +14,12 @@ async def get_all_users(request_body: RBUser = Depends()) -> list[SUser]:
     return await UserDAO.find_all(**request_body.to_dict())
 
 
-@router.get("/{user_id}", summary="Получить одного пользователя по id")
-async def get_user_by_id(user_id: int) -> SUser | None:
-    rez = await UserDAO.find_one_or_none_by_id(user_id)
+@router.get("/{id}", summary="Получить одного пользователя по id")
+async def get_user_by_id(id: int, admin: User = Depends(get_current_manager_user)):
+    rez = await UserDAO.getClient(id)
     if rez is None:
-        return {'message': f'Пользователь с id {user_id} не найден!'}
+        return {'message': f'Пользователь с id {id} не найден!'}
+    
     return rez
 
 
@@ -30,6 +31,10 @@ async def get_me(user_data: User = Depends(get_current_user)):
 @router.get("/all_users/")
 async def get_all_users(user_data: User = Depends(get_current_admin_user)):
     return await UserDAO.find_all()
+
+@router.get("/all_clients/")
+async def get_all_clients(user_data: User = Depends(get_current_admin_user)):
+    return await UserDAO.find_all(role="client")
 
 
 @router.post("/edit-user/")
