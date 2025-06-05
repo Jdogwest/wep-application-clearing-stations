@@ -1,41 +1,35 @@
 @use "variables" as *;
 
 @mixin input {
-  &[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: $primary-color;
-    margin-right: 6px;
-    box-shadow: none;
-    cursor: pointer;
+  padding: 15px;
+  font-size: 16px;
+  color: #000;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  width: 100%;
+  background-color: #fff;
+  resize: none;
+  &::placeholder {
+    color: $placeholder-color;
   }
 
-  &[type="text"],
-  &[type="email"],
-  &[type="password"],
-  &[type="number"],
-  &[type="select"] {
-    padding: 15px;
-    font-size: 16px;
-    color: #000;
-    border: 1px solid $border-color;
-    border-radius: 2px;
-    width: 100%;
-
-    &::placeholder {
-      color: $placeholder-color;
-    }
-
-    &:disabled {
-      border-color: $input-disabled-color;
-      color: $placeholder-disabled-color;
-      cursor: auto;
-    }
+  &:disabled {
+    border-color: $input-disabled-color;
+    color: $placeholder-disabled-color;
+    cursor: auto;
   }
 
   &:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  &[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    margin-right: 6px;
+    box-shadow: none;
   }
 }
 
@@ -44,12 +38,26 @@
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  transition: 0.3s;
+  background-color: $primary-color;
+  color: white;
+  width: fit-content;
   &--save,
-  &--edit {
-    background-color: $color-primary;
+  &--edit,
+  &--add {
+    background-color: $primary-color;
     color: #fff;
   }
   &--cancel {
-    background-color: $cancel-color;
+    background-color: $color-cancel;
+    color: black;
+  }
+  &--delete {
+    background-color: $color-error;
+    color: white;
+  }
+  &:hover {
+    transition: 0.3s;
+    opacity: 0.7;
   }
 }

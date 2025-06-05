@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NotificationComponent } from '../landing/components/notification/notification.component';
+import { NotificationComponent } from '@/shared/components/notification/notification.component';
 
 @Component({
   selector: 'app-root',

@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { CreateApplicationsLandingComponent } from '../client-account/components/create-applications-landing/create-applications-landing.component';
-import { ProfileLandingComponent } from '../client-account/components/profile-landing/profile-landing.component';
-import { RequestEditComponent } from '../manager-page/components/request-edit/request-edit.component';
-import { RequestsLandingComponent } from '../manager-page/components/requests-landing/requests-landing.component';
-import { LandingLayoutComponent } from '../landing/components/landing-layout/landing-layout.component';
-import { MainLandingComponent } from '../landing/components/main-landing/main-landing.component';
-import { TeamsLandingComponent } from '../manager-page/components/teams-landing/teams-landing.component';
-import { UsersLandingComponent } from '../manager-page/components/users-landing/users-landing.component';
-import { AdminLayoutComponent } from '../manager-page/admin-layout/admin-layout.component';
-import { UserEditComponent } from '../manager-page/components/user-edit/user-edit.component';
+import { LandingLayoutComponent } from '@/main-page/landing-layout/landing-layout.component';
+import { MainLandingComponent } from '@/main-page/landings/main-landing/main-landing.component';
+import { ProfileLandingComponent } from '@/main-page/landings/profile-landing/profile-landing.component';
+import { CreateApplicationsLandingComponent } from '@/main-page/landings/create-applications-landing/create-applications-landing.component';
+import { RequestsLandingComponent } from '@/manager-page/landings/requests-landing/requests-landing.component';
+import { RequestEditComponent } from '@/manager-page/landings/request-edit/request-edit.component';
+import { TeamsLandingComponent } from '@/manager-page/landings/teams-landing/teams-landing.component';
+import { UsersLandingComponent } from '@/manager-page/landings/users-landing/users-landing.component';
+import { AdminLayoutComponent } from '@/manager-page/admin-layout/admin-layout.component';
+import { UserEditComponent } from '@/manager-page/landings/user-edit/user-edit.component';
 
 export const routes: Routes = [
   {
