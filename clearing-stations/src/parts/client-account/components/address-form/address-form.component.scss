@@ -1,3 +1,6 @@
+@use "variables" as *;
+@use "mixins" as *;
+
 .profile-address {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   padding: 30px;
@@ -20,15 +23,7 @@
       }
     }
     &-input {
-      padding: 15px;
-      font-size: 16px;
-      &::placeholder {
-        color: #aaa;
-      }
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-      }
+      @include input();
     }
     &-link {
       color: black;

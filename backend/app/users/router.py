@@ -14,11 +14,11 @@ async def get_all_users(request_body: RBUser = Depends()) -> list[SUser]:
     return await UserDAO.find_all(**request_body.to_dict())
 
 
-@router.get("/{id}", summary="Получить одного пользователя по id")
-async def get_user_by_id(user_id: str) -> SUser | None:
+@router.get("/{user_id}", summary="Получить одного пользователя по id")
+async def get_user_by_id(user_id: int) -> SUser | None:
     rez = await UserDAO.find_one_or_none_by_id(user_id)
     if rez is None:
-        return {'message': f'Пользователь с должностью {user_id} не найден!'}
+        return {'message': f'Пользователь с id {user_id} не найден!'}
     return rez
 
 

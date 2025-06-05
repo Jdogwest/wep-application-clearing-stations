@@ -1,0 +1,52 @@
+.user-edit {
+  &__title {
+    font-size: 34px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  &__fields-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  &__input {
+    padding: 15px;
+    font-size: 16px;
+    &::placeholder {
+      color: #aaa;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+  &__select {
+    border-radius: 2px;
+    padding: 15px;
+    font-size: 16px;
+    background: transparent;
+    border: 1px solid #c7c7ce;
+    cursor: pointer;
+  }
+  &__button {
+    &--save {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(#4caf50, 5%);
+      }
+    }
+  }
+}

@@ -7,8 +7,8 @@ import { API_BE_HOST } from '../../../../env';
 })
 export class AuthService {
   private apiUrls = {
-    login: API_BE_HOST + 'users/auth/login/',
-    register: API_BE_HOST + 'users/auth/register/',
+    login: API_BE_HOST + 'auth/login/',
+    register: API_BE_HOST + 'auth/register/',
   };
 
   private readonly httpClient = inject(HttpClient);

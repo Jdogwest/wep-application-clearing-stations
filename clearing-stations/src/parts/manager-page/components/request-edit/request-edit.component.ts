@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { DatePickerModule } from 'primeng/datepicker';
-import { RequestFormData } from '../../interfaces/request-form.interface';
+import { RequestFormData } from '../../../client-account/interfaces/request-form.interface';
 
 type FormControlsOf<T> = {
   [K in keyof T]: FormControl<T[K]>;
