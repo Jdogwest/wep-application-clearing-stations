@@ -21,9 +21,10 @@
       </div>
     </div>
     <div class="contact-form__right">
-      <form class="contact-form__form" action="#">
+      <form class="contact-form__form" [formGroup]="contactForm">
         <div class="contact-form__field">
           <input
+            [formControl]="contactForm.controls.fio"
             class="contact-form__input"
             type="text"
             placeholder="Ваше ФИО"
@@ -31,6 +32,7 @@
         </div>
         <div class="contact-form__field">
           <input
+            [formControl]="contactForm.controls.phone_number"
             class="contact-form__input"
             type="text"
             placeholder="Ваш номер телефона для связи"
@@ -38,6 +40,7 @@
         </div>
         <div class="contact-form__field">
           <textarea
+            [formControl]="contactForm.controls.comment"
             class="contact-form__textarea"
             placeholder="Описание (по желанию)"
           ></textarea>
@@ -49,7 +52,13 @@
           </label>
         </div>
         <div class="contact-form__field">
-          <input class="contact-form__submit" type="submit" value="Отправить" />
+          <button
+            (click)="onSubmit()"
+            class="contact-form__submit"
+            type="button"
+          >
+            Отправить
+          </button>
         </div>
       </form>
     </div>

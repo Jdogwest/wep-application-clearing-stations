@@ -24,7 +24,7 @@
       "@/main-page/services/*": ["src/parts/client-page/services/*"],
       "@/main-page/constants/*": ["src/parts/client-page/constants/*"],
       "@/main-page/forms/*": ["src/parts/client-page/forms/*"],
-      "@/main-page/interfaces/*": ["src/shared/interfaces/*"],
+      "@/main-page/interfaces/*": ["src/parts/client-page/interfaces/*"],
       "@/main-page/landings/*": ["src/parts/client-page/landings/*"],
       "@/manager-page/*": ["src/parts/manager-page/*"],
       "@/manager-page/components/*": ["src/parts/manager-page/components/*"],
@@ -36,7 +36,8 @@
       "@/shared/components/*": ["src/shared/components/*"],
       "@/shared/services/*": ["src/shared/services/*"],
       "@/shared/constants/*": ["src/shared/constants/*"],
-      "@/shared/interfaces/*": ["src/shared/interfaces/*"]
+      "@/shared/interfaces/*": ["src/shared/interfaces/*"],
+      "@/guards/*": ["src/core/guards/*"]
     }
   },
   "angularCompilerOptions": {

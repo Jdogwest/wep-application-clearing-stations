@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AddressFormData } from '@/shared/interfaces/address-form.interface';
+import { AuthService } from '@/shared/services/auth.service';
 
 type FormControlsOf<T> = {
   [K in keyof T]: FormControl<T[K]>;
@@ -13,7 +14,11 @@ type FormControlsOf<T> = {
   styleUrl: './address-form.component.scss',
 })
 export class AddressFormComponent {
+  private readonly authService = inject(AuthService);
+
   protected readonly isEdit = signal(false);
+
+  readonly isLoggedIn = signal(false);
 
   addressForm = new FormGroup<FormControlsOf<AddressFormData>>({
     city: new FormControl<string>(''),

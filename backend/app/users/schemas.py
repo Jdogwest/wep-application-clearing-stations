@@ -53,10 +53,13 @@ class SUserEdit(BaseModel):
     name: str = Field(..., min_length=3, max_length=50, description="Имя клиента, от 3 до 50 символов")
     surname: str = Field(..., min_length=3, max_length=50, description="Фамилия клиента, от 3 до 50 символов")
     patronymic: str = Field(default=None, description="Отчество клиента, от 3 до 50 символов")
-    phone_number: str = Field(..., description="Номер телефона в международном формате, начинающийся с '+'")
+    email: str = Field(..., description="Электронная почта клиента")
+    phone_number: Optional[str] = Field(None, description="Номер телефона в международном формате, начинающийся с '+'")
 
     @field_validator("phone_number")
     def validate_phone_number(cls, value):
+        if value is None:
+            return value
         if not re.match(r'^\+\d{1,15}$', value):
             raise ValueError('Номер телефона должен начинаться с "+" и содержать от 1 до 15 цифр')
         return value

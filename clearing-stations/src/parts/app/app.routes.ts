@@ -9,6 +9,8 @@ import { TeamsLandingComponent } from '@/manager-page/landings/teams-landing/tea
 import { UsersLandingComponent } from '@/manager-page/landings/users-landing/users-landing.component';
 import { AdminLayoutComponent } from '@/manager-page/admin-layout/admin-layout.component';
 import { UserEditComponent } from '@/manager-page/landings/user-edit/user-edit.component';
+import { AdminGuard } from '@/guards/admin.guard';
+import { CallRequestsLandingComponent } from '@/manager-page/landings/call-requests-landing/call-requests-landing.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
     component: AdminLayoutComponent,
     children: [
       {
@@ -52,6 +55,10 @@ export const routes: Routes = [
       {
         path: 'user-edit/:id',
         component: UserEditComponent,
+      },
+      {
+        path: 'call-requests',
+        component: CallRequestsLandingComponent,
       },
     ],
   },

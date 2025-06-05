@@ -17,8 +17,11 @@ export class AuthService {
   private readonly httpClient = inject(HttpClient);
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+
   public isLoggedIn$: Observable<boolean> =
     this.isLoggedInSubject.asObservable();
+
+  private sessionData: { user: any; septic: any } | null = null;
 
   register(registerData: {
     email: string;
@@ -51,15 +54,42 @@ export class AuthService {
   }
 
   checkAuth() {
-    this.httpClient.get(this.apiUrls.me, { withCredentials: true }).subscribe({
-      next: () => this.isLoggedInSubject.next(true),
-      error: () => this.isLoggedInSubject.next(false),
-    });
+    this.httpClient
+      .get<{ user: any; septic: any }>(this.apiUrls.me, {
+        withCredentials: true,
+      })
+      .subscribe({
+        next: (res) => {
+          this.isLoggedInSubject.next(true);
+          this.sessionData = res;
+        },
+        error: (err) => {
+          this.isLoggedInSubject.next(false);
+          this.sessionData = null;
+        },
+      });
   }
 
-  logout() {
+  getSessionData(): Observable<{ user: any; septic: any } | null> {
+    if (this.sessionData) {
+      return new BehaviorSubject(this.sessionData).asObservable();
+    }
+
+    return this.httpClient
+      .get<{ user: any; septic: any }>(this.apiUrls.me, {
+        withCredentials: true,
+      })
+      .pipe(
+        tap((res) => {
+          this.sessionData = res;
+          this.isLoggedInSubject.next(true);
+        })
+      );
+  }
+
+  logout(): Observable<any> {
     return this.httpClient
       .post(this.apiUrls.logout, {}, { withCredentials: true })
-      .subscribe(() => this.isLoggedInSubject.next(false));
+      .pipe(tap(() => this.isLoggedInSubject.next(false)));
   }
 }

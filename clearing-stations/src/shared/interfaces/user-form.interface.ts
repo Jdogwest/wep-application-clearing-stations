@@ -3,5 +3,5 @@ export interface UserFormData {
   name: string | null;
   patronymic: string | null;
   email: string | null;
-  phone: string | null;
+  phone_number: string | null;
 }
