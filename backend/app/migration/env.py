@@ -17,6 +17,7 @@ from app.services.models import Service
 from app.workman_brigadiers.models import WorkmanBrigadier
 from app.requests.models import Request
 from app.request_services.models import RequestService
+from app.call_requests.models import CallRequest
 
 config = context.config
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
