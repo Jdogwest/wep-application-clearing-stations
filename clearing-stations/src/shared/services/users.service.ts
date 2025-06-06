@@ -12,12 +12,19 @@ export class UsershService {
     allUsers: API_BE_HOST + 'users/all_users/',
     userById: (id: number) => API_BE_HOST + `users/${id}/`,
     editUser: API_BE_HOST + 'users/edit-user/',
+    getAllClients: API_BE_HOST + 'users/all_clients/',
   };
 
   private readonly httpClient = inject(HttpClient);
 
   getAllUsers() {
     return this.httpClient.get(this.apiUrls.allUsers, {
+      withCredentials: true,
+    });
+  }
+
+  getAllClients() {
+    return this.httpClient.get(this.apiUrls.getAllClients, {
       withCredentials: true,
     });
   }

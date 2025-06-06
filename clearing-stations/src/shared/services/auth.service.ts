@@ -28,11 +28,14 @@ export class AuthService {
     password: string;
     name: string;
     surname: string;
+    patronymic: string;
   }) {
     const payload = {
       email: registerData.email,
       password: registerData.password,
-      fio: `${registerData.name} ${registerData.surname}`.trim(),
+      name: registerData.name,
+      surname: registerData.surname,
+      patronymic: registerData.patronymic,
     };
     return this.httpClient.post(this.apiUrls.register, payload);
   }

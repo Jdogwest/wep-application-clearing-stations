@@ -96,6 +96,17 @@
               />
             </div>
             <div class="auth__form-group">
+              <label class="auth__form-label" for="patronymic">Отчество</label>
+              <input
+                class="auth__form-input"
+                type="text"
+                id="patronymic"
+                name="patronymic"
+                placeholder="Иван"
+                [formControl]="registrationForm.controls.patronymic"
+              />
+            </div>
+            <div class="auth__form-group">
               <label class="auth__form-label" for="email">Email</label>
               <input
                 class="auth__form-input"

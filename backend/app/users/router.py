@@ -33,12 +33,12 @@ async def get_all_users(user_data: User = Depends(get_current_admin_user)):
     return await UserDAO.find_all()
 
 @router.get("/all_clients/", summary="Получить всех клиентов. Лдя менеджера и админа")
-async def get_all_clients(user_data: User = Depends(get_current_admin_user)):
+async def get_all_clients(user_data: User = Depends(get_current_manager_user)):
     return await UserDAO.find_all(role="client")
 
 
 @router.post("/edit-user/", summary="Редактировать пользователя. Для клиента")
-async def edit_user(user_data: SUserEdit, user: User = Depends(get_current_manager_user)):
+async def edit_user(user_data: SUserEdit, user: User = Depends(get_current_user)):
     return await UserDAO.edit_client(user.id, user_data.model_dump())
 
 @router.post("/edit-user-full/{user_id}", summary="Редактировать пользователя. Для менеджера и админа")

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsershService } from '@/shared/services/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '@/shared/services/auth.service';
 
 @Component({
   selector: 'app-users-landing',
@@ -13,13 +14,45 @@ import { RouterLink } from '@angular/router';
 export class UsersLandingComponent implements OnInit {
   users: any[] = [];
   selectedUser: any = null;
+  currentRole: string = '';
 
-  constructor(private usersService: UsershService) {}
+  constructor(
+    private usersService: UsershService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.usersService.getAllUsers().subscribe({
+    this.authService.getSessionData().subscribe({
+      next: (user: any) => {
+        this.currentRole = user?.user.role;
+        this.loadUsers();
+      },
+      error: (err) => {
+        console.error('Ошибка при получении текущего пользователя', err);
+      },
+    });
+  }
+
+  private loadUsers() {
+    const request$ =
+      this.currentRole === 'admin'
+        ? this.usersService.getAllUsers()
+        : this.currentRole === 'manager'
+        ? this.usersService.getAllClients()
+        : null;
+    if (!request$) {
+      this.users = [];
+      return;
+    }
+
+    request$.subscribe({
       next: (data: any) => {
-        this.users = data;
+        if (Array.isArray(data)) {
+          this.users = data;
+        } else {
+          console.error('Ошибка:', data);
+          this.users = [];
+        }
       },
       error: (err) => {
         console.error('Ошибка при получении пользователей', err);

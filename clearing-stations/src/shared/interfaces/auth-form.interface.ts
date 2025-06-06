@@ -10,6 +10,7 @@ export interface registrationFormInterface {
   password: FormControl<string | null>;
   repeatPassword: FormControl<string | null>;
   surname: FormControl<string | null>;
+  patronymic: FormControl<string | null>;
   name: FormControl<string | null>;
   acceptedAgreement: FormControl<boolean | null>;
 }

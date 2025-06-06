@@ -17,6 +17,7 @@ export class HeaderLandingComponent {
   private readonly authService = inject(AuthService);
 
   protected readonly isOpen = signal(false);
+
   protected readonly isLoggedIn = signal(false);
 
   private notificationService = inject(NotificationService);

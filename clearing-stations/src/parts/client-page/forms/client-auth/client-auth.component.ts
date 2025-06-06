@@ -56,9 +56,10 @@ export class ClientAuthComponent {
     this.authService
       .register({
         email: this.registrationForm.value.email || '',
-        password: this.registrationForm.value.password || '',
         name: this.registrationForm.value.name || '',
         surname: this.registrationForm.value.surname || '',
+        patronymic: this.registrationForm.value.patronymic || '',
+        password: this.registrationForm.value.password || '',
       })
       .pipe(
         finalize(() => {
@@ -104,6 +105,7 @@ export class ClientAuthComponent {
         repeatPassword: new FormControl('', [Validators.required]),
         surname: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
+        patronymic: new FormControl('', []),
         acceptedAgreement: new FormControl(false, [Validators.requiredTrue]),
       },
       [this.passwordsMatchValidator]

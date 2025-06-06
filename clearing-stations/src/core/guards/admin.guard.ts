@@ -14,7 +14,10 @@ export class AdminGuard implements CanActivate {
     return this.authService.getSessionData().pipe(
       take(1),
       map((session) => {
-        if (session?.user?.role === 'admin') {
+        if (
+          session?.user?.role === 'admin' ||
+          session?.user?.role === 'manager'
+        ) {
           return true;
         } else {
           this.router.navigate(['']);

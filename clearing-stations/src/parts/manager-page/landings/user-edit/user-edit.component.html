@@ -59,11 +59,13 @@
               >
                 <option value="admin">Администратор</option>
                 <option value="client">Клиент</option>
+                <option value="manager">Менеджер</option>
+                <option value="workman">Рабочий</option>
+                <option value="brigadier">Бригадир</option>
               </select>
             </div>
           </div>
           <div class="user-edit__section">
-            @if (userForm.controls.role.value === 'client') {
             <div class="user-edit__section">
               <div class="user-edit__field">
                 <label for="city" class="user-edit__label">Город</label>
@@ -116,7 +118,6 @@
                 />
               </div>
             </div>
-            }
           </div>
         </div>
 
