@@ -1,4 +1,4 @@
-import { CallRequestsService } from '@/shared/services/call-requests';
+import { CallRequestsService } from '@/shared/services/call-requests.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

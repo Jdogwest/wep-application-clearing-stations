@@ -1,5 +1,5 @@
 export interface ServicesFormData {
-  service: string[] | null;
+  service: { id: string; quantity: number }[];
   quantity: number | null;
   date: Date | null;
   time: string | null;

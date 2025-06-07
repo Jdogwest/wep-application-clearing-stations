@@ -1,5 +1,5 @@
 import { ContactFormData } from '@/main-page/interfaces/contact.interface';
-import { CallRequestsService } from '@/shared/services/call-requests';
+import { CallRequestsService } from '@/shared/services/call-requests.service';
 import { NotificationService } from '@/shared/services/notification.service';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';

@@ -9,14 +9,28 @@
       <div class="services__form-group">
         <label class="services__form-label" for="service">Тип услуги</label>
         <div class="services__form-selected-list">
-          @for (service of selectedService; let i = $index; track service) {
+          @for (service of selectedService; let i = $index; track i) {
           <div class="services__form-selected">
-            <p class="services__form-selected-title">{{ service }}</p>
+            <p class="services__form-selected-title">{{ service.name }}</p>
             <div class="services__form-selected-controls">
               <div class="services__form-selected-quantity">
-                <button class="services__form-btn--decrease">-</button>
-                <p class="services__form-selected-quantity-value">1</p>
-                <button class="services__form-btn--increase">+</button>
+                <button
+                  class="services__form-btn--decrease"
+                  type="button"
+                  (click)="decreaseQuantity(i)"
+                >
+                  -
+                </button>
+                <p class="services__form-selected-quantity-value">
+                  {{ service.quantity }}
+                </p>
+                <button
+                  class="services__form-btn--increase"
+                  type="button"
+                  (click)="increaseQuantity(i)"
+                >
+                  +
+                </button>
               </div>
             </div>
             <button
@@ -31,54 +45,55 @@
           }
         </div>
         <div class="services__form-add-row">
-          <ng-container *ngIf="showSelect">
-            <select
-              class="services__form-input"
-              name="service"
-              id="service"
-              [formControl]="selectedServiceId"
-            >
-              <option class="services__form-option" value="none">
-                Не выбрано
-              </option>
-              @for (service of services; track service.id) {
-              <option class="services__form-option" [value]="service.id">
-                {{ service.title }}
-              </option>
-              }
-            </select>
-            <button
-              type="button"
-              class="services__form-btn services__form-btn--add"
-              (click)="addService()"
-              [disabled]="selectedServiceId.value === 'none'"
-            >
-              Добавить
-            </button>
-          </ng-container>
+          @if (showSelect) {
+          <select
+            class="services__form-input"
+            name="service"
+            id="service"
+            [formControl]="selectedServiceId"
+          >
+            <option class="services__form-option" value="none">
+              Не выбрано
+            </option>
+            @for (service of services; track service.id) {
+            <option class="services__form-option" [value]="service.id">
+              {{ service.name }}
+            </option>
+            }
+          </select>
           <button
-            *ngIf="
-              !showSelect &&
-              (serviceForm.controls.service.value?.length ?? 0) > 0
-            "
+            type="button"
+            class="services__form-btn services__form-btn--add"
+            (click)="addService()"
+            [disabled]="selectedServiceId.value === 'none'"
+          >
+            Добавить
+          </button>
+          } @if (!showSelect) {
+          <button
             type="button"
             class="services__form-btn services__form-btn--add"
             (click)="showAddSelect()"
           >
             Добавить еще
           </button>
+          }
         </div>
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="date">Дата выполнения</label>
-        <p-datepicker
+        <p-calendar
           [formControl]="serviceForm.controls.date"
           [iconDisplay]="'input'"
           [showIcon]="true"
           inputId="icondisplay"
-          [disabledDates]="busyDates"
           placeholder="Не выбрано"
-        ></p-datepicker>
+          [minDate]="today"
+          [disabledDates]="busyDates"
+          [disabledDays]="[0, 6]"
+        >
+          ></p-calendar
+        >
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="time">Время выполнения</label>
