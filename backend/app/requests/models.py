@@ -1,4 +1,5 @@
-from sqlalchemy import ForeignKey, Integer, String
+from datetime import date, time
+from sqlalchemy import ForeignKey, Integer, String, text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.database import Base, int_pk, created_at
 
@@ -8,9 +9,12 @@ class Request(Base):
     created_at: Mapped[created_at]
     client_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
     contract_number: Mapped[str] = mapped_column(String, nullable=True)
-    status: Mapped[str]
-    summary: Mapped[int]
+    status: Mapped[str] = mapped_column(String, default="new", server_default=text("'new'"))
+    summary: Mapped[int] = mapped_column(Integer, default=0)
     septic_id: Mapped[int] = mapped_column(Integer, ForeignKey("septics.id"))
+    planed_start_time: Mapped[time]
+    planed_start_date: Mapped[date]
+    comment: Mapped[str | None] = mapped_column(String, nullable=True)
 
 
     client = relationship("User", back_populates="requests")
@@ -19,11 +23,13 @@ class Request(Base):
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
                 f"created_at={self.created_at!r},"
-                f"client_id={self.client_id!r}),"
-                f"contract_number={self.contract_number!r}),"
-                f"status={self.status!r}),"
-                f"summary={self.summary!r}),"
-                f"septic_id={self.septic_id!r})")
+                f"client_id={self.client_id!r},"
+                f"contract_number={self.contract_number!r},"
+                f"status={self.status!r},"
+                f"summary={self.summary!r},"
+                f"septic_id={self.septic_id!r},"
+                f"planed_start_date={self.planed_start_date!r},"
+                f"planed_start_time={self.planed_start_time!r})")
 
     def __repr__(self):
         return str(self)
@@ -36,5 +42,7 @@ class Request(Base):
             "contract_number": self.contract_number,
             "status": self.status,
             "summary": self.summary,
-            "septic_id": self.septic_id
+            "septic_id": self.septic_id,
+            "planed_start_date": self.planed_start_date,
+            "planed_start_time": self.planed_start_time
         } 

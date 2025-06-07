@@ -1,19 +1,13 @@
 from fastapi import APIRouter, Depends
 from app.requests.dao import RequestDAO
-from app.requests.schemas import SRequest
-from app.requests.rb import RBRequest
+from app.requests.schemas import SRequestCreate
+from app.users.dependencies import get_current_user
+from app.users.models import User
 
 
 router = APIRouter(prefix='/requests', tags=['Работа с запросами'])
 
 
-@router.get("/", summary="Получить все запросы", response_model=list[SRequest])
-async def get_all_requests(request_body: RBRequest = Depends()) -> list[SRequest]:
-    return await RequestDAO.find_all(**request_body.to_dict())
-
-@router.get("/{id}", summary="Получить один запрос по id")
-async def get_request_by_id(request_id: str) -> SRequest | None:
-    rez = await RequestDAO.find_one_or_none_by_id(request_id)
-    if rez is None:
-        return {'message': f'Запрос с id {request_id} не найден!'}
-    return rez
+@router.post("/add/", summary="создать запрос")
+async def add_request(request_data: SRequestCreate, user: User = Depends(get_current_user)):
+    return await RequestDAO.add_request(request_data, user.id)
