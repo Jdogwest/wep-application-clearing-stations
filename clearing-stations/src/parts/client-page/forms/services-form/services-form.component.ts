@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar';
-import { ourServicesDescriptions } from '@/main-page/constants/our-services-descriptions';
 import { ServicesFormData } from '@/shared/interfaces/services-form.interface';
 import { ServiceService } from '@/shared/services/services.service';
 import { Service } from '@/shared/interfaces/Service.interface';
+import { RequestsService } from '@/shared/services/requests.service';
+import { AddRequestPayload } from '@/shared/interfaces/requests.interface';
+import { NotificationService } from '@/shared/services/notification.service';
+import { DatePicker } from 'primeng/datepicker';
 
 type FormControlsOf<T> = {
   [K in keyof T]: FormControl<T[K]>;
@@ -13,13 +15,16 @@ type FormControlsOf<T> = {
 
 @Component({
   selector: 'app-services-form',
-  imports: [CommonModule, ReactiveFormsModule, CalendarModule],
+  imports: [CommonModule, ReactiveFormsModule, DatePicker],
   templateUrl: './services-form.component.html',
   styleUrl: './services-form.component.scss',
 })
 export class ServicesFormComponent {
   services: Service[] = [];
   private readonly serviceService = inject(ServiceService);
+  private readonly requestsService = inject(RequestsService);
+
+  private notificationService = inject(NotificationService);
 
   ngOnInit() {
     this.loadServices();
@@ -58,6 +63,11 @@ export class ServicesFormComponent {
     new Date('2025-06-07'),
     new Date('2025-06-08'),
     new Date('2025-06-09'),
+  ];
+  times = [
+    { label: '08:00', value: '08:00' },
+    { label: '09:00', value: '09:00' },
+    { label: '10:00', value: '10:00' },
   ];
 
   isDateAvailable = (date: Date): boolean => {
@@ -137,7 +147,44 @@ export class ServicesFormComponent {
 
   onSubmit() {
     if (this.serviceForm.valid) {
-      console.log(this.serviceForm.value);
+      const formValue = this.serviceForm.value;
+
+      const date = formValue.date;
+      const time = formValue.time;
+
+      if (!date || !time) {
+        console.warn('Дата или время не выбраны');
+        return;
+      }
+
+      const dateStr = date.toISOString().split('T')[0];
+
+      const [hours, minutes] = time.split(':');
+      const planedTime = new Date(date);
+      planedTime.setHours(Number(hours), Number(minutes), 0, 0);
+
+      const payload: AddRequestPayload = {
+        planed_start_date: dateStr,
+        planed_start_time: planedTime.toISOString(),
+        comment: formValue.comment ?? '',
+        services: (formValue.service ?? []).map((s) => ({
+          service_id: Number(s.id),
+          amount: s.quantity,
+        })),
+      };
+
+      this.requestsService.addRequest(payload).subscribe({
+        next: (res: any) => {
+          this.notificationService.success(
+            res?.detail || 'Заявка успешно создана'
+          );
+        },
+        error: (err) => {
+          this.notificationService.error(
+            err?.error?.detail || 'Ошибка создания заявки'
+          );
+        },
+      });
     }
   }
 }

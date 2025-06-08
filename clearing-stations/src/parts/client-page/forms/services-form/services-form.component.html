@@ -82,23 +82,23 @@
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="date">Дата выполнения</label>
-        <p-calendar
+        <p-datepicker
           [formControl]="serviceForm.controls.date"
-          [iconDisplay]="'input'"
           [showIcon]="true"
-          inputId="icondisplay"
-          placeholder="Не выбрано"
           [minDate]="today"
           [disabledDates]="busyDates"
           [disabledDays]="[0, 6]"
-        >
-          ></p-calendar
-        >
+          placeholder="Не выбрано"
+        ></p-datepicker>
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="time">Время выполнения</label>
         <select class="services__form-input" name="time" id="time">
-          <option class="services__form-option" value="none">Не выбрано</option>
+          @for (time of times; track time) {
+          <option class="services__form-option" [value]="time.value">
+            {{ time.label }}
+          </option>
+          }
         </select>
       </div>
       <div class="services__form-group">
@@ -115,6 +115,7 @@
           type="submit"
           class="services__form-btn services__form-btn--save"
           [disabled]="!serviceForm.valid"
+          (click)="onSubmit()"
         >
           Создать заявку
         </button>

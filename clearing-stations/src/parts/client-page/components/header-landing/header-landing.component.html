@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header__container">
     <div class="header__item">
-      <div class="header__logo">
+      <a href="/" class="header__logo">
         <img
           src="assets/img/logo.png"
           alt="Логотип"
@@ -10,7 +10,7 @@
         <p class="header__logo-title">
           Обслуживание<br />частых очистных<br />ооружений
         </p>
-      </div>
+      </a>
       <button (click)="toggleMenu()" class="header__hamburger-btn">
         <span></span>
       </button>
@@ -18,9 +18,6 @@
 
     <nav class="header__item" [class.header__item--open]="isOpen()">
       <ul class="header__list">
-        <li class="header__list-item">
-          <a class="header__list-link" href="/">Главная</a>
-        </li>
         <li class="header__list-item">
           <a class="header__list-link" href="#why-us">О нас</a>
         </li>
