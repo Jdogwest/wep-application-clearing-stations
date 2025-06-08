@@ -5,11 +5,12 @@ from app.database import Base, int_pk
 
 
 class RequestService(Base):
-    id: Mapped[int_pk]
-    service_id: Mapped[int] = mapped_column(Integer, ForeignKey("services.id"))
+    service_id: Mapped[int] = mapped_column(Integer, ForeignKey("services.id"), primary_key=True)
+    request_id: Mapped[int] = mapped_column(Integer, ForeignKey("requests.id"), primary_key=True)
     amount: Mapped[int]
 
     service = relationship("Service", back_populates="requests")
+    request = relationship("Request", back_populates="services")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "

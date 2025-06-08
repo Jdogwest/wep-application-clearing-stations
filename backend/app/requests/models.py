@@ -18,7 +18,8 @@ class Request(Base):
 
 
     client = relationship("User", back_populates="requests")
-    septics = relationship("Septic", back_populates="requests")
+    septic = relationship("Septic", back_populates="requests")
+    services = relationship("RequestService", back_populates="request")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
@@ -37,12 +38,26 @@ class Request(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "created_at": self.created_at,
+            "created_at": self.created_at.isoformat(),
             "client_id": self.client_id,
             "contract_number": self.contract_number,
             "status": self.status,
             "summary": self.summary,
             "septic_id": self.septic_id,
-            "planed_start_date": self.planed_start_date,
-            "planed_start_time": self.planed_start_time
-        } 
+            "planed_start_date": self.planed_start_date.isoformat(),
+            "planed_start_time": self.planed_start_time.strftime("%H:%M"),
+            "comment": self.comment,
+
+            "client": self.client.to_dict() if hasattr(self, 'client') and self.client is not None else None,
+            "septic": self.septic.to_dict() if hasattr(self, 'septic') and self.septic is not None else None,
+
+            # Обработка списка услуг
+            "services": [
+                {
+                    "service_id": rs.service_id,
+                    "amount": rs.amount,
+                    "name": rs.service.name if rs.service else None
+                }
+                for rs in (self.services or [])
+            ]
+        }

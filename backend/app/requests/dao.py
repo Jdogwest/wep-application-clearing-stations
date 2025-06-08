@@ -1,10 +1,15 @@
+import logging
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
+
 from app.dao.base import BaseDAO
 from app.requests.models import Request
-from app.requests.schemas import SRequestCreate
+from app.requests.schemas import SRequestCreate, SRequestFull
 from app.database import async_session_maker
 from app.septics.models import Septic
 from app.services.models import Service
+from app.request_services.models import RequestService
+from app.requests.rb import RBRequest
 
 
 class RequestDAO(BaseDAO):
@@ -51,7 +56,28 @@ class RequestDAO(BaseDAO):
             )
 
             session.add(new_request)
+
+            for service in data.services:
+                new_request.services.append(
+                    RequestService(request_id=new_request.id, service_id=service.service_id, amount=service.amount)
+                )
             await session.commit()
             await session.refresh(new_request)
 
             return new_request.to_dict()
+        
+
+    @classmethod
+    async def find_all_requests(cls):
+        async with async_session_maker() as session:
+            result = await session.execute(
+                select(cls.model)
+                .options(
+                    selectinload(cls.model.client),
+                    selectinload(cls.model.septic),
+                    selectinload(cls.model.services).selectinload(RequestService.service)
+                )
+            )
+            requests = result.scalars().all()
+
+            return [req.to_dict() for req in requests]

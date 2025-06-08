@@ -13,7 +13,7 @@ class Septic(Base):
     owner_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="septics")
-    requests = relationship("Request", back_populates="septics")
+    requests = relationship("Request", back_populates="septic")
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "
