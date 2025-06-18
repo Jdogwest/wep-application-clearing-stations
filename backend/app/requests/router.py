@@ -17,3 +17,8 @@ async def add_request(request_data: SRequestCreate, user: User = Depends(get_cur
 @router.get("/all/", summary="Получить все запросы", response_model=list[SRequestFull])
 async def get_all_requests(user_data: User = Depends(get_current_manager_user)):
     return await RequestDAO.find_all_requests()
+
+
+@router.get('/my_requests/', summary='Получить мои запросы', response_model=list[SRequestFull])
+async def get_my_requests(user_data: User = Depends(get_current_user)):
+    return await RequestDAO.find_my_requests(user_data.id)

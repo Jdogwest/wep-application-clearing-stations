@@ -22,49 +22,62 @@ class RequestDAO(BaseDAO):
                 select(Septic).where(Septic.owner_id == user_id)
             )
             septic = result_septic.scalars().first()
-
             if not septic:
                 raise ValueError("У пользователя нет привязанного септика")
 
-
-            service_ids = [item.service_id for item in data.services]
-
             result_services = await session.execute(
-                select(Service).where(Service.id.in_(service_ids))
+                select(Service)
             )
-            services_db = result_services.scalars().all()
+            services = result_services.scalars().all()
 
-            service_map = {s.id: s.price for s in services_db}
+            service_map = {s.id: s.price for s in services}
 
-            total_summary = sum(
-                service_map[item.service_id] * item.amount
-                for item in data.services
-                if item.service_id in service_map
-            )
+            total_summary = 0
+            for item in data.services:
+                service_id = item.service_id
+                amount = item.amount
+                if service_id in service_map:
+                    total_summary += service_map[service_id] * amount
+                else:
+                    raise ValueError(f"Услуга с ID {service_id} не найдена в базе")
 
-            if len(service_map) != len(service_ids):
-                raise ValueError("Некоторые услуги не найдены")
-
-
+            
             new_request = cls.model(
-                client_id=user_id,
-                septic_id=septic.id,
-                summary=total_summary,
-                planed_start_date=data.planed_start_date,
-                planed_start_time=data.planed_start_time,
-                comment=data.comment
-            )
-
+                client_id = user_id,
+                septic_id = septic.id,
+                status = 'new',
+                planed_start_time = data.planed_start_time,
+                planed_start_date = data.planed_start_date,
+                comment = data.comment,
+                summary = total_summary)
+            
             session.add(new_request)
 
-            for service in data.services:
-                new_request.services.append(
-                    RequestService(request_id=new_request.id, service_id=service.service_id, amount=service.amount)
-                )
             await session.commit()
             await session.refresh(new_request)
 
-            return new_request.to_dict()
+            for serv in data.services:
+                new_service_request_item = RequestService(
+                    request_id = new_request.id,
+                    amount = serv.amount,
+                    service_id = serv.service_id
+                )
+                session.add(new_service_request_item)
+
+            await session.commit()
+
+            created_request = await session.execute(
+                select(Request).where(Request.id == new_request.id)
+                .options(
+                    selectinload(Request.client),
+                    selectinload(Request.septic),
+                    selectinload(Request.services).selectinload(RequestService.service)
+                )
+            )
+            created_request = created_request.scalar_one()
+
+
+            return created_request.to_dict()
         
 
     @classmethod
@@ -81,3 +94,19 @@ class RequestDAO(BaseDAO):
             requests = result.scalars().all()
 
             return [req.to_dict() for req in requests]
+        
+
+    @classmethod
+    async def find_my_requests(cls, user_id: int):
+       async with async_session_maker() as session:
+           result = await session.execute(
+                select(cls.model)
+                .where(cls.model.client_id == user_id)
+                .options(
+                    selectinload(cls.model.client),
+                    selectinload(cls.model.septic),
+                    selectinload(cls.model.services).selectinload(RequestService.service)
+                )
+            )
+           requests = result.scalars().all()
+           return [req.to_dict() for req in requests]
