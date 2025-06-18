@@ -19,7 +19,7 @@ export class CreateApplicationsLandingComponent {
 
   readonly isLoggedIn = signal(false);
 
-  constructor() {
+  ngOnInit() {
     this.authService.checkAuth();
 
     this.authService.isLoggedIn$

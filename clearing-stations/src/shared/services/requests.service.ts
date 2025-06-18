@@ -8,6 +8,8 @@ import { API_BE_HOST } from '../../../env';
 export class RequestsService {
   private apiUrls = {
     addRequest: API_BE_HOST + 'requests/add/',
+    getMyRequests: API_BE_HOST + 'requests/my_requests/',
+    getAllRequests: API_BE_HOST + 'requests/all/',
   };
 
   private readonly httpClient = inject(HttpClient);
@@ -22,6 +24,17 @@ export class RequestsService {
     }[];
   }) {
     return this.httpClient.post(this.apiUrls.addRequest, requestData, {
+      withCredentials: true,
+    });
+  }
+
+  getMyRequests() {
+    return this.httpClient.get(this.apiUrls.getMyRequests, {
+      withCredentials: true,
+    });
+  }
+  getAllRequests() {
+    return this.httpClient.get(this.apiUrls.getAllRequests, {
       withCredentials: true,
     });
   }

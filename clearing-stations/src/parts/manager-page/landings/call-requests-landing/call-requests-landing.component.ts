@@ -1,5 +1,5 @@
 import { CallRequestsService } from '@/shared/services/call-requests.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-call-requests',
@@ -10,14 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class CallRequestsLandingComponent implements OnInit {
   callRequests: any[] = [];
 
-  constructor(private callRequestsService: CallRequestsService) {}
+  callRequestsService = inject(CallRequestsService);
 
   ngOnInit(): void {
     this.callRequestsService.getCallRequests().subscribe({
       next: (data: any) => {
         this.callRequests = data;
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Ошибка при получении заявок:', error);
       },
     });

@@ -22,7 +22,7 @@ export class HeaderLandingComponent {
 
   private notificationService = inject(NotificationService);
 
-  constructor() {
+  ngOnInit() {
     this.authService.checkAuth();
     this.authService.isLoggedIn$
       .pipe(takeUntilDestroyed())
