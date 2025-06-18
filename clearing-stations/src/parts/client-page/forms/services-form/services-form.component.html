@@ -93,7 +93,12 @@
       </div>
       <div class="services__form-group">
         <label class="services__form-label" for="time">Время выполнения</label>
-        <select class="services__form-input" name="time" id="time">
+        <select
+          class="services__form-input"
+          name="time"
+          id="time"
+          [formControl]="serviceForm.controls.time"
+        >
           @for (time of times; track time) {
           <option class="services__form-option" [value]="time.value">
             {{ time.label }}
@@ -115,7 +120,6 @@
           type="submit"
           class="services__form-btn services__form-btn--save"
           [disabled]="!serviceForm.valid"
-          (click)="onSubmit()"
         >
           Создать заявку
         </button>

@@ -165,13 +165,14 @@ export class ServicesFormComponent {
 
       const payload: AddRequestPayload = {
         planed_start_date: dateStr,
-        planed_start_time: planedTime.toISOString(),
+        planed_start_time: time,
         comment: formValue.comment ?? '',
         services: (formValue.service ?? []).map((s) => ({
           service_id: Number(s.id),
           amount: s.quantity,
         })),
       };
+      console.log(payload);
 
       this.requestsService.addRequest(payload).subscribe({
         next: (res: any) => {
