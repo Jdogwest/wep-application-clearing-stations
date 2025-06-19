@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Output, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  inject,
+  signal,
+  DestroyRef,
+} from '@angular/core';
 import { AuthService } from '@/shared/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,29 +19,29 @@ import { NotificationService } from '@/shared/services/notification.service';
   templateUrl: './header-landing.component.html',
   styleUrl: './header-landing.component.scss',
 })
-export class HeaderLandingComponent {
+export class HeaderLandingComponent implements OnInit {
   @Output() loginClick = new EventEmitter<void>();
 
   private readonly authService = inject(AuthService);
+  private readonly notificationService = inject(NotificationService);
+  private readonly destroyRef = inject(DestroyRef);
 
   protected readonly isOpen = signal(false);
-
   protected readonly isLoggedIn = signal(false);
 
-  private notificationService = inject(NotificationService);
-
-  constructor() {
+  ngOnInit(): void {
     this.authService.checkAuth();
+
     this.authService.isLoggedIn$
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((loggedIn) => this.isLoggedIn.set(loggedIn));
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isOpen.set(!this.isOpen());
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout().subscribe({
       next: (res: any) => {
         this.notificationService.success(

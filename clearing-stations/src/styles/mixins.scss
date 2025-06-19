@@ -61,3 +61,26 @@
     opacity: 0.7;
   }
 }
+
+@mixin requests-status {
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  &--new {
+    border: 1px solid #a4d4ff;
+    background-color: #f0f8ff;
+  }
+  &--in_work {
+    border: 1px solid #ffef5e;
+    background-color: #fffacd;
+  }
+  &--complete {
+    border: 1px solid #9ecf78;
+    background-color: #dff0d8;
+  }
+  &--cancelled {
+    border: 1px solid #ffa7a7;
+    background-color: #f2dede;
+  }
+}

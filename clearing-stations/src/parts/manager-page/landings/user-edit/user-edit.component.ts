@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsershService } from '@/shared/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -31,10 +31,8 @@ export class UserEditComponent {
     septicVolume: new FormControl(null),
   });
 
-  constructor(
-    private usersService: UsershService,
-    private route: ActivatedRoute
-  ) {}
+  private usersService = inject(UsershService);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const userId = this.route.snapshot.params['id'];
@@ -59,13 +57,13 @@ export class UserEditComponent {
           septicVolume: data.septicVolume || null,
         });
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(`Ошибка при получении пользователя с id ${id}`, err);
       },
     });
   }
 
-  onSave() {
+  onSave(): void {
     if (this.userForm.valid) {
       const formData = this.userForm.getRawValue();
       console.log('Отправка данных:', formData);

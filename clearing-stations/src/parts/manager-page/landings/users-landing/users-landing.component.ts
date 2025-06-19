@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UsershService } from '@/shared/services/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -16,24 +16,22 @@ export class UsersLandingComponent implements OnInit {
   selectedUser: any = null;
   currentRole: string = '';
 
-  constructor(
-    private usersService: UsershService,
-    private authService: AuthService
-  ) {}
+  private usersService = inject(UsershService);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.authService.getSessionData().subscribe({
       next: (user: any) => {
-        this.currentRole = user?.user.role;
+        this.currentRole = user?.user?.role ?? '';
         this.loadUsers();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Ошибка при получении текущего пользователя', err);
       },
     });
   }
 
-  private loadUsers() {
+  private loadUsers(): void {
     const request$ =
       this.currentRole === 'admin'
         ? this.usersService.getAllUsers()

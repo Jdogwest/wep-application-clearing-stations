@@ -10,29 +10,39 @@
   </div>
   <div class="requests-landing__content">
     <div class="requests-landing__list">
-      <div class="requests-landing__item new">
-        <h2 class="requests-landing__item-title">Заявка №1 (Новая)</h2>
+      @for (request of requests; track request) {
+      <div
+        [class]="
+          'requests-landing__item requests-landing__item--' + request.status
+        "
+      >
+        <h2 class="requests-landing__item-title">
+          Заявка №{{ request.id }} ({{ statusMap[request.status] }})
+        </h2>
         <div class="requests-landing__item-content">
           <div class="requests-landing__item-info">
             <h3 class="requests-landing__item-info-title">
               Данные пользователя
             </h3>
-            <p class="requests-landing__item-info-text">Фамилия: Ежиков</p>
-            <p class="requests-landing__item-info-text">Имя: Константин</p>
             <p class="requests-landing__item-info-text">
-              Отчество: Владимирович
+              Фамилия: {{ request.client.surname }}
+            </p>
+            <p class="requests-landing__item-info-text">
+              Имя: {{ request.client.name }}
+            </p>
+            <p class="requests-landing__item-info-text">
+              Отчество: {{ request.client.patronymic }}
             </p>
           </div>
           <div class="requests-landing__item-info">
             <h3 class="requests-landing__item-info-title">Услуги</h3>
             <p class="requests-landing__item-info-text">Тип услуги:</p>
             <ul class="requests-landing__item-services-list">
+              @for (service of request.services; track service) {
               <li class="requests-landing__item-services-list-item">
-                Чистка и промывка септиков (1)
+                {{ service.name }} ({{ service.amount }})
               </li>
-              <li class="requests-landing__item-services-list-item">
-                Ремонт и замена насосных станций (1)
-              </li>
+              }
             </ul>
             <p class="requests-landing__item-info-text">
               Дата выполнения: 01.06.2025
@@ -50,6 +60,7 @@
           >
         </div>
       </div>
+      }
     </div>
   </div>
 </div>
