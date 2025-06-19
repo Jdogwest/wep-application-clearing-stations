@@ -81,16 +81,26 @@ class RequestDAO(BaseDAO):
         
 
     @classmethod
-    async def find_all_requests(cls):
+    async def find_all_requests(cls, request_status: str = None):
         async with async_session_maker() as session:
-            result = await session.execute(
-                select(cls.model)
+            if request_status:
+                result = await session.execute(
+                select(cls.model).where(Request.status == request_status)
                 .options(
                     selectinload(cls.model.client),
                     selectinload(cls.model.septic),
                     selectinload(cls.model.services).selectinload(RequestService.service)
                 )
-            )
+            ) 
+            else:
+                result = await session.execute(
+                    select(cls.model)
+                    .options(
+                        selectinload(cls.model.client),
+                        selectinload(cls.model.septic),
+                        selectinload(cls.model.services).selectinload(RequestService.service)
+                    )
+                )
             requests = result.scalars().all()
 
             return [req.to_dict() for req in requests]
