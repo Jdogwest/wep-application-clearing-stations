@@ -14,8 +14,9 @@ class User(Base):
     role: Mapped[str] = mapped_column(String, default='client', server_default=text("'client'"), nullable=False)
 
     septics = relationship("Septic", back_populates="owner")
-    requests = relationship("Request", back_populates="client")
-    requests_brigadier = relationship("Request", back_populates="brigadier")
+    requests = relationship("Request", back_populates="client", foreign_keys='Request.client_id')
+    requests_brigadier = relationship("Request", back_populates="brigadier", foreign_keys='Request.brigadier_id')
+
 
 
     brigadier_relations = relationship(

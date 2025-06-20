@@ -15,11 +15,11 @@ class Request(Base):
     planed_start_time: Mapped[time]
     planed_start_date: Mapped[date]
     comment: Mapped[str | None] = mapped_column(String, nullable=True)
-    bigadier_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=True)
+    brigadier_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=True)
 
 
-    bigadier = relationship("User", back_populates="requests_brigadier")
-    client = relationship("User", back_populates="requests")
+    brigadier = relationship("User", back_populates="requests_brigadier", foreign_keys='Request.brigadier_id')
+    client = relationship("User", back_populates="requests", foreign_keys='Request.client_id')
     septic = relationship("Septic", back_populates="requests")
     services = relationship("RequestService", back_populates="request")
 
