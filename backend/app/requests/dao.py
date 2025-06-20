@@ -11,6 +11,7 @@ from app.septics.models import Septic
 from app.services.models import Service
 from app.request_services.models import RequestService
 from app.requests.rb import RBRequest
+from app.users.models import User
 
 
 class RequestDAO(BaseDAO):
@@ -142,11 +143,15 @@ class RequestDAO(BaseDAO):
     @classmethod
     async def edit_request(cls, id: int, data: SRequestEdit):
         async with async_session_maker() as session:
-            request = await cls.find_request_by_id(id)
+            request = await session.execute(
+                select(Request).where(Request.id == id)
+            )
+            request = request.scalar_one_or_none()
+            
             if not request:
                 raise HTTPException(status_code=404, detail="Заявка не найдена")
 
-            for key, value in data.items():
+            for key, value in data:
                 setattr(request, key, value)
 
             await session.commit()

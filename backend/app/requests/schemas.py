@@ -70,10 +70,10 @@ class SRequestFull(BaseModel):
 
 
 class SRequestEdit(BaseModel):
-    status: Optional[str]
-    planed_start_time: Optional[time]
-    planed_start_date: Optional[date]
-    brigadier_id: Optional[int]
-    contract_number: Optional[str]
+    status: Optional[str] = None
+    planed_start_time: Optional[time] = None
+    planed_start_date: Optional[date] = None
+    brigadier_id: Optional[int] = None
+    contract_number: Optional[str] = None
 
 

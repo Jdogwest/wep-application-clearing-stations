@@ -65,7 +65,6 @@ class UserDAO(BaseDAO):
     @classmethod
     async def edit_user_full_and_role(cls, user_id: int, data: dict):
         async with async_session_maker() as session:
-            print(data)
             result = await session.execute(select(User).where(User.id == user_id))
             user = result.scalar_one()
 
