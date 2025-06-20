@@ -41,6 +41,9 @@ class SSepticShort(BaseModel):
     id: int
     model: str
     volume: int
+    city: str
+    street: str
+    house: str
 
 
 class SRequestServiceShort(BaseModel):
