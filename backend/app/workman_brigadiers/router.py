@@ -9,7 +9,7 @@ router = APIRouter(prefix='/workman_brigadiers', tags=['Работа с бриг
 
 
 @router.get("/", summary="Получить всех рабочих и их бригадиров")
-async def get_all_workmans():
+async def get_all_brigades():
     return await WorkmanBrigadierDAO.find_brigades()
 
 

@@ -31,7 +31,8 @@ async def auth_user(response: Response, user_data: SUserAuth):
                             detail='Неверная почта или пароль')
     access_token = create_access_token({"sub": str(check.id)})
     response.set_cookie(key="users_access_token", value=access_token, httponly=True, samesite="none", secure=True)
-    return {'access_token': access_token, 'refresh_token': None}
+    return check.to_dict()
+
 
 
 @router.post("/logout/")

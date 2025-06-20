@@ -120,3 +120,19 @@ class RequestDAO(BaseDAO):
             )
            requests = result.scalars().all()
            return [req.to_dict() for req in requests]
+
+
+    @classmethod
+    async def find_request_by_id(cls, id: int):
+        async with async_session_maker() as session:
+            result = await session.execute(
+                select(cls.model).where(Request.id == id)
+                .options(
+                    selectinload(cls.model.client),
+                    selectinload(cls.model.septic),
+                    selectinload(cls.model.services).selectinload(RequestService.service)
+                )
+            )
+            request = result.scalar_one_or_none()
+
+            return request.to_dict() if request else None

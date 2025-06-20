@@ -5,6 +5,7 @@ from app.database import async_session_maker
 from app.workman_brigadiers.models import WorkmanBrigadier
 from app.workman_brigadiers.schemas import SWorkmanBrigadierEdit
 from app.users.models import User
+from collections import defaultdict
 
 
 class WorkmanBrigadierDAO(BaseDAO):
@@ -49,11 +50,14 @@ class WorkmanBrigadierDAO(BaseDAO):
             )
 
             brigades = result.scalars().all()
-
-            # Группируем по бригадирам
-            from collections import defaultdict
+           
 
             brigade_map = defaultdict(list)
+
+            result_brigadiers = await session.execute(
+                select(User).where(User.role == 'brigadier')
+            )
+
 
             for wb in brigades:
                 brigade_data = {
@@ -74,7 +78,7 @@ class WorkmanBrigadierDAO(BaseDAO):
                 brigade_data["workers"].append(worker_data)
                 brigade_map[wb.brigadier.id].append(brigade_data)
 
-            # Убираем дубли бригадиров и объединяем всех работников
+            
             final_result = []
 
             for brigadier_id, workers_list in brigade_map.items():
@@ -82,6 +86,17 @@ class WorkmanBrigadierDAO(BaseDAO):
                 all_workers = [w["workers"][0] for w in workers_list]
                 merged["workers"] = all_workers
                 final_result.append(merged)
+
+            # Добавляем бригадиров без рабочих
+            for brigadier in result_brigadiers.scalars():
+                if brigadier.id not in brigade_map:
+                    final_result.append({
+                        "brigadier_id": brigadier.id,
+                        "brigadier_name": brigadier.name,
+                        "brigadier_surname": brigadier.surname,
+                        "brigadier_patronymic": brigadier.patronymic,
+                        "workers": []
+                    })
 
             return final_result
         
