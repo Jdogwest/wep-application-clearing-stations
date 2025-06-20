@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_BE_HOST } from '../../../env';
 
@@ -33,9 +33,16 @@ export class RequestsService {
       withCredentials: true,
     });
   }
-  getAllRequests() {
+
+  getAllRequests(requestStatus?: string) {
+    let params = new HttpParams();
+    if (requestStatus) {
+      params = params.set('request_status', requestStatus);
+    }
+
     return this.httpClient.get(this.apiUrls.getAllRequests, {
       withCredentials: true,
+      params,
     });
   }
 }

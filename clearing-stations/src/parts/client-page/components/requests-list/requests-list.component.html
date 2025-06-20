@@ -1,7 +1,7 @@
 <div class="requests-list">
   <h1 class="requests-list__title">Список заявок</h1>
   <div class="requests-list__items">
-    @for (request of requests; track request) {
+    @for (request of sortedRequests; track request) {
     <div [class]="'requests-list__item requests-list__item--' + request.status">
       <h2 class="requests-list__item-title">
         Заявка №{{ request.id }} ({{ statusMap[request.status] }})

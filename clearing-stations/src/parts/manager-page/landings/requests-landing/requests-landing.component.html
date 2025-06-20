@@ -1,16 +1,19 @@
 <div class="requests-landing">
   <div class="requests-landing__header">
     <h1 class="requests-landing__title">Заявки</h1>
-    <select class="requests-landing__select" name="sort" id="sort">
-      <option value="all">Все</option>
-      <option value="new">Новые</option>
-      <option value="old">Старые</option>
-      <option value="completed">Завершенные</option>
-    </select>
+    <form [formGroup]="form">
+      <select class="requests-landing__select" formControlName="status">
+        <option value="all">Все</option>
+        <option value="new">Новые</option>
+        <option value="in_work">В работе</option>
+        <option value="completed">Завершенные</option>
+        <option value="cancelled">Отменённые</option>
+      </select>
+    </form>
   </div>
   <div class="requests-landing__content">
     <div class="requests-landing__list">
-      @for (request of requests; track request) {
+      @for (request of sortedRequests; track request) {
       <div
         [class]="
           'requests-landing__item requests-landing__item--' + request.status

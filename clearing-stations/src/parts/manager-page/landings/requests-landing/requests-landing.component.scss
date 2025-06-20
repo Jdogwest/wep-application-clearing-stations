@@ -26,9 +26,15 @@
     border: 1px solid var(--border-color);
     padding: 20px;
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // min-height: 350px;
     &-content {
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
       gap: 20px;
     }
     &-title {
