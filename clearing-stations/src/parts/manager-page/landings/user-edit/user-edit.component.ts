@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UsershService } from '@/shared/services/users.service';
+import { UsersService } from '@/shared/services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserFormData } from '@/manager-page/interfaces/user-form.interface';
@@ -31,7 +31,7 @@ export class UserEditComponent {
     septicVolume: new FormControl(null),
   });
 
-  private usersService = inject(UsershService);
+  private usersService = inject(UsersService);
   private route = inject(ActivatedRoute);
 
   ngOnInit(): void {

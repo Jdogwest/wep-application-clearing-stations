@@ -1,4 +1,4 @@
-import { MyRequest } from '@/shared/interfaces/myRequest.interface';
+import { MyRequest } from '@/shared/interfaces/my-request.interface';
 import { RequestsService } from '@/shared/services/requests.service';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';

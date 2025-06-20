@@ -107,6 +107,12 @@ export class ServicesFormComponent {
     }
   }
 
+  get totalCost(): number {
+    return this.selectedService.reduce((sum, service) => {
+      return sum + service.price * service.quantity;
+    }, 0);
+  }
+
   increaseQuantity(index: number) {
     const current = this.serviceForm.controls.service.value ?? [];
     const updated = current.map((item, i) =>

@@ -54,6 +54,10 @@
         color: var(--text-color);
       }
     }
+
     @include requests-status;
+  }
+  &__item-button {
+    @include button;
   }
 }

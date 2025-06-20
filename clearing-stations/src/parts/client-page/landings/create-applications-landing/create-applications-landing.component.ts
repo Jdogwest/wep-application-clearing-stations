@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { UserFormComponent } from '@/main-page/forms/user-form/user-form.component';
 import { AddressFormComponent } from '@/main-page/forms/address-form/address-form.component';
 import { ServicesFormComponent } from '@/main-page/forms/services-form/services-form.component';
@@ -14,8 +14,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class CreateApplicationsLandingComponent {
   private readonly authService = inject(AuthService);
-
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly isLoggedIn = signal(false);
 
@@ -23,7 +23,7 @@ export class CreateApplicationsLandingComponent {
     this.authService.checkAuth();
 
     this.authService.isLoggedIn$
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((loggedIn) => {
         this.isLoggedIn.set(loggedIn);
 

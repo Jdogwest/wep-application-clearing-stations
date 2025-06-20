@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { signal } from '@angular/core';
 import { RequestsService } from '@/shared/services/requests.service';
 import { RequestsListComponent } from '@/main-page/components/requests-list/requests-list.component';
-import { MyRequest } from '@/shared/interfaces/myRequest.interface';
+import { MyRequest } from '@/shared/interfaces/my-request.interface';
 
 @Component({
   selector: 'app-profile-landing',

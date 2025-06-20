@@ -1,7 +1,7 @@
 export interface Service {
   id: number;
   name: string;
-  price: string;
+  price: number;
   description: string;
   time_to_complete: number;
 }

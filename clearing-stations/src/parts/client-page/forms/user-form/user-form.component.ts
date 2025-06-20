@@ -4,7 +4,7 @@ import { UserFormData } from '@/shared/interfaces/user-form.interface';
 import { AuthService } from '@/shared/services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { UsershService } from '@/shared/services/users.service';
+import { UsersService } from '@/shared/services/users.service';
 import { NotificationService } from '@/shared/services/notification.service';
 
 type FormControlsOf<T> = {
@@ -20,7 +20,7 @@ type FormControlsOf<T> = {
 export class UserFormComponent implements OnInit {
   private readonly authService = inject(AuthService);
 
-  private readonly usersService = inject(UsershService);
+  private readonly usersService = inject(UsersService);
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -92,6 +92,7 @@ export class UserFormComponent implements OnInit {
             res?.detail || 'Данные пользователя успешно обновлены'
           );
           this.isEdit.set(false);
+          this.disableEdit();
         },
         error: (err) => {
           this.notificationService.error(

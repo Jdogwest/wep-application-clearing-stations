@@ -11,7 +11,9 @@
         <div class="services__form-selected-list">
           @for (service of selectedService; let i = $index; track i) {
           <div class="services__form-selected">
-            <p class="services__form-selected-title">{{ service.name }}</p>
+            <p class="services__form-selected-title">
+              {{ service.name }} ({{ service.price | number : "1.2-2" }} рублей)
+            </p>
             <div class="services__form-selected-controls">
               <div class="services__form-selected-quantity">
                 <button
@@ -57,7 +59,7 @@
             </option>
             @for (service of services; track service.id) {
             <option class="services__form-option" [value]="service.id">
-              {{ service.name }}
+              {{ service.name }} ({{ service.price | number : "1.2-2" }} рублей)
             </option>
             }
           </select>
@@ -115,7 +117,12 @@
           [formControl]="serviceForm.controls.comment"
         ></textarea>
       </div>
-      <div class="services__form-group-buttons">
+      <p class="services__form-total-text">
+        Итоговая сумма:
+        {{ totalCost | number : "1.2-2" }} рублей
+      </p>
+
+      <div class="services__form-group-button">
         <button
           type="submit"
           class="services__form-btn services__form-btn--save"

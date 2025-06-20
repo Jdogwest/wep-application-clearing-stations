@@ -82,6 +82,7 @@ export class AddressFormComponent {
           this.notificationService.success(
             res?.detail || 'Септик успешно обновлён'
           );
+          this.disableEdit();
         },
         error: (err) => {
           this.notificationService.error(

@@ -1,4 +1,4 @@
-import { MyRequest } from '@/shared/interfaces/myRequest.interface';
+import { MyRequest } from '@/shared/interfaces/my-request.interface';
 import { Component, Input } from '@angular/core';
 
 @Component({

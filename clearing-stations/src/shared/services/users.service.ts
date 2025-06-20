@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UsershService {
+export class UsersService {
   private apiUrls = {
     allUsers: API_BE_HOST + 'users/all_users/',
     userById: (id: number) => API_BE_HOST + `users/${id}/`,

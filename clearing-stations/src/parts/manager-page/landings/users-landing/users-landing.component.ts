@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { UsershService } from '@/shared/services/users.service';
+import { UsersService } from '@/shared/services/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@/shared/services/auth.service';
@@ -16,7 +16,8 @@ export class UsersLandingComponent implements OnInit {
   selectedUser: any = null;
   currentRole: string = '';
 
-  private usersService = inject(UsershService);
+  private usersService = inject(UsersService);
+  
   private authService = inject(AuthService);
 
   ngOnInit(): void {
