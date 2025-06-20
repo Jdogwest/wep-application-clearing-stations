@@ -64,3 +64,13 @@ class SRequestFull(BaseModel):
     client: SUserShort
     septic: SSepticShort
     services: List[SRequestServiceShort]
+
+
+class SRequestEdit(BaseModel):
+    status: Optional[str]
+    planed_start_time: Optional[time]
+    planed_start_date: Optional[date]
+    brigadier_id: Optional[int]
+    contract_number: Optional[str]
+
+

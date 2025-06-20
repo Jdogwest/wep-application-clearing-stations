@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.requests.dao import RequestDAO
-from app.requests.schemas import SRequestCreate, SRequestFull
+from app.requests.schemas import SRequestCreate, SRequestEdit, SRequestFull
 from app.users.dependencies import get_current_manager_user, get_current_user
 from app.users.models import User
 
@@ -27,3 +27,8 @@ async def get_my_requests(user_data: User = Depends(get_current_user)):
 @router.get('/{id}', summary="Получить заявку по id", response_model = SRequestFull | None)
 async def get_request_by_id(id: int, user_data: User = Depends(get_current_manager_user)):
     return await RequestDAO.find_request_by_id(id)
+
+
+@router.post("/edit/{id}", summary="Редактировать заявку")
+async def edit_request(id: int, data: SRequestEdit, user_data: User = Depends(get_current_manager_user)):
+    return await RequestDAO.edit_request(id, data)

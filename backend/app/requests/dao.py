@@ -1,10 +1,11 @@
 import logging
+from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from app.dao.base import BaseDAO
 from app.requests.models import Request
-from app.requests.schemas import SRequestCreate, SRequestFull
+from app.requests.schemas import SRequestCreate, SRequestEdit
 from app.database import async_session_maker
 from app.septics.models import Septic
 from app.services.models import Service
@@ -136,3 +137,17 @@ class RequestDAO(BaseDAO):
             request = result.scalar_one_or_none()
 
             return request.to_dict() if request else None
+        
+
+    @classmethod
+    async def edit_request(cls, id: int, data: SRequestEdit):
+        async with async_session_maker() as session:
+            request = await cls.find_request_by_id(id)
+            if not request:
+                raise HTTPException(status_code=404, detail="Заявка не найдена")
+
+            for key, value in data.items():
+                setattr(request, key, value)
+
+            await session.commit()
+            return {"message": "Заявка успешно обновлена"}

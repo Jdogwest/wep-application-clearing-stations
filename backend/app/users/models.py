@@ -15,6 +15,8 @@ class User(Base):
 
     septics = relationship("Septic", back_populates="owner")
     requests = relationship("Request", back_populates="client")
+    requests_brigadier = relationship("Request", back_populates="brigadier")
+
 
     brigadier_relations = relationship(
         "WorkmanBrigadier",
