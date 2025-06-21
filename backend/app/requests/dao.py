@@ -156,3 +156,28 @@ class RequestDAO(BaseDAO):
 
             await session.commit()
             return {"message": "Заявка успешно обновлена"}
+        
+
+    @classmethod
+    async def find_busy_dates(cls):
+        async with async_session_maker() as session:
+            query = select(Request).where((Request.status == 'in_progress') | (Request.status == 'new'))
+            requests = await session.execute(query)
+            requests = requests.scalars().all()
+
+            busy_dates = set()
+            for request in requests:
+                busy_dates.add((request.planed_start_date, request.brigadier_id))
+
+            query = select(User).where(User.role == "brigadier")
+            brigadiers = await session.execute(query)
+            brigadiers = brigadiers.scalars().all()
+            busy_dates_copy = busy_dates.copy()
+            for busy_date in busy_dates_copy:
+                available_brigadiers = [brigadier.id for brigadier in brigadiers if brigadier.id != busy_date[1]]
+                if available_brigadiers:
+                    busy_dates.remove(busy_date)
+
+            result = [date[0] for date in busy_dates]
+            return list(result)
+
