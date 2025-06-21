@@ -53,7 +53,7 @@ export class RequestsService {
     });
   }
   editByIdRequest(id: number, requestData: any) {
-    return this.httpClient.post(
+    return this.httpClient.put(
       `${this.apiUrls.editByIdRequest}${id}/`,
       requestData,
       {
