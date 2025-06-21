@@ -20,7 +20,11 @@ export class BrigadeService {
       withCredentials: true,
     });
   }
-  editBrigade(payload: BrigadeUpdatePayload) {
+  editBrigade(data: BrigadeUpdatePayload[]) {
+    const payload = {
+      brigads: data,
+    };
+    console.log('payload', payload);
     return this.httpClient.put(this.apiUrls.editBrigade, payload, {
       withCredentials: true,
     });
