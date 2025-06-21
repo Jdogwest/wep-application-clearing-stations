@@ -1,3 +1,4 @@
+from datetime import date
 import logging
 from fastapi import HTTPException
 from sqlalchemy import select
@@ -181,3 +182,21 @@ class RequestDAO(BaseDAO):
             result = [date[0] for date in busy_dates]
             return list(result)
 
+
+    @classmethod
+    async def find_brigades_on_date(cls, date: date):
+        async with async_session_maker() as session:
+            query = select(Request).where((Request.status == 'in_progress') | (Request.status == 'new'))
+            requests = await session.execute(query)
+            requests = requests.scalars().all()
+            
+            busy_brigadiers = set()
+            for request in requests:
+                if request.planed_start_date == date and request.brigadier_id is not None:
+                    busy_brigadiers.add(request.brigadier_id)
+            
+            query = select(User).where((User.role == "brigadier") & (User.id.notin_(busy_brigadiers)))
+            available_brigadiers = await session.execute(query)
+            available_brigadiers = available_brigadiers.scalars().all()
+
+            return [brigadier.to_dict() for brigadier in available_brigadiers]

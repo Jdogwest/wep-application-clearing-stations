@@ -32,7 +32,9 @@ class Request(Base):
                 f"summary={self.summary!r},"
                 f"septic_id={self.septic_id!r},"
                 f"planed_start_date={self.planed_start_date!r},"
-                f"planed_start_time={self.planed_start_time!r})")
+                f"planed_start_time={self.planed_start_time!r},"
+                f"comment={self.comment!r},"
+                f"brigadier_id={self.brigadier_id!r})")
 
     def __repr__(self):
         return str(self)
@@ -49,6 +51,7 @@ class Request(Base):
             "planed_start_date": self.planed_start_date.isoformat(),
             "planed_start_time": self.planed_start_time.strftime("%H:%M"),
             "comment": self.comment,
+            "brigadier_id": self.brigadier_id,
 
             "client": self.client.to_dict() if hasattr(self, 'client') and self.client is not None else None,
             "septic": self.septic.to_dict() if hasattr(self, 'septic') and self.septic is not None else None,
