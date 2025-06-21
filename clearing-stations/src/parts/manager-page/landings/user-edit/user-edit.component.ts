@@ -43,7 +43,6 @@ export class UserEditComponent {
     this.authService.getSessionData().subscribe({
       next: (data) => {
         this.user.set(data?.user);
-        console.log(this.user());
       },
     });
   }
