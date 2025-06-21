@@ -15,6 +15,7 @@ class Request(Base):
     planed_start_time: Mapped[time]
     planed_start_date: Mapped[date]
     comment: Mapped[str | None] = mapped_column(String, nullable=True)
+    work_comment: Mapped[str | None] = mapped_column(String, nullable=True)
     brigadier_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=True)
 
 
@@ -34,6 +35,7 @@ class Request(Base):
                 f"planed_start_date={self.planed_start_date!r},"
                 f"planed_start_time={self.planed_start_time!r},"
                 f"comment={self.comment!r},"
+                f"work_comment={self.work_comment!r},"
                 f"brigadier_id={self.brigadier_id!r})")
 
     def __repr__(self):
@@ -51,6 +53,7 @@ class Request(Base):
             "planed_start_date": self.planed_start_date.isoformat(),
             "planed_start_time": self.planed_start_time.strftime("%H:%M"),
             "comment": self.comment,
+            "work_comment": self.work_comment,
             "brigadier_id": self.brigadier_id,
 
             "client": self.client.to_dict() if hasattr(self, 'client') and self.client is not None else None,

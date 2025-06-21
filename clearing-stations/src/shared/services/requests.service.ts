@@ -12,6 +12,7 @@ export class RequestsService {
     getAllRequests: API_BE_HOST + 'requests/all/',
     getById: API_BE_HOST + 'requests/',
     editByIdRequest: API_BE_HOST + 'requests/edit/',
+    getBrigadesOnDate: API_BE_HOST + 'requests/brigades_on_date/',
   };
 
   private readonly httpClient = inject(HttpClient);
@@ -60,5 +61,11 @@ export class RequestsService {
         withCredentials: true,
       }
     );
+  }
+
+  getBrigadesOnDate(date: string) {
+    return this.httpClient.get(`${this.apiUrls.getBrigadesOnDate}${date}`, {
+      withCredentials: true,
+    });
   }
 }

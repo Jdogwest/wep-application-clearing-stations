@@ -103,9 +103,9 @@
           class="request-edit__form-select"
         >
           <option value="none">Не выбрано</option>
-          @for (brigade of brigades; track brigade.brigadier_id) {
-          <option [value]="brigade.brigadier_id">
-            {{ brigade.brigadier_surname }} {{ brigade.brigadier_name }}
+          @for (brigade of brigades(); track brigade.id) {
+          <option [value]="brigade.id">
+            {{ brigade.surname }} {{ brigade.name }}
           </option>
           }
         </select>
@@ -117,7 +117,7 @@
         <textarea
           id="comment"
           class="request-edit__form-textarea"
-          [formControl]="requestForm.controls.comment"
+          [formControl]="requestForm.controls.work_comment"
         ></textarea>
       </div>
       <div class="request-edit__form-group-buttons">
