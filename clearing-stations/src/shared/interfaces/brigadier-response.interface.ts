@@ -6,4 +6,5 @@ export interface BrigadierResponse {
   phone_number: string;
   email: string;
   role: string;
+  workmans_count: number;
 }

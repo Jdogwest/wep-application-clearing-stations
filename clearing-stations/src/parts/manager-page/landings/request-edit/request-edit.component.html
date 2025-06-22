@@ -105,7 +105,8 @@
           <option value="none">Не выбрано</option>
           @for (brigade of brigades(); track brigade.id) {
           <option [value]="brigade.id">
-            {{ brigade.surname }} {{ brigade.name }}
+            {{ brigade.surname }} {{ brigade.name }} ( рабочих:
+            {{ brigade.workmans_count }} )
           </option>
           }
         </select>

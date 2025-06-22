@@ -1,7 +1,6 @@
 from datetime import date
-import logging
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
 from app.dao.base import BaseDAO
@@ -11,8 +10,8 @@ from app.database import async_session_maker
 from app.septics.models import Septic
 from app.services.models import Service
 from app.request_services.models import RequestService
-from app.requests.rb import RBRequest
 from app.users.models import User
+from app.workman_brigadiers.models import WorkmanBrigadier
 
 
 class RequestDAO(BaseDAO):
@@ -199,4 +198,24 @@ class RequestDAO(BaseDAO):
             available_brigadiers = await session.execute(query)
             available_brigadiers = available_brigadiers.scalars().all()
 
-            return [brigadier.to_dict() for brigadier in available_brigadiers]
+            available_brigadiers = [brigadier for brigadier in available_brigadiers]
+
+            for brigadier in available_brigadiers:
+                query = select(func.count("*")).select_from(WorkmanBrigadier).where(WorkmanBrigadier.brigadier_id == brigadier.id)
+                workmans_amount = await session.execute(query)
+
+                setattr(brigadier, 'workmans_count', workmans_amount.scalar_one_or_none())
+         
+            available_brigadiers = [{
+                "id": brigadier.id,
+                "name": brigadier.name,
+                "surname": brigadier.surname,
+                "patronymic": brigadier.patronymic,
+                "phone_number": brigadier.phone_number,
+                "email": brigadier.email,
+                "role": brigadier.role,
+                "workmans_count": brigadier.workmans_count,
+            } for brigadier in available_brigadiers]
+
+                
+            return available_brigadiers
