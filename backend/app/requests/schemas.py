@@ -73,6 +73,11 @@ class SRequestFull(BaseModel):
     services: List[SRequestServiceShort]
 
 
+class SRequestServiceShortEdit(BaseModel):
+    service_id: int
+    amount: int
+
+
 class SRequestEdit(BaseModel):
     status: Optional[str] = None
     planed_start_time: Optional[time] = None
@@ -81,5 +86,7 @@ class SRequestEdit(BaseModel):
     contract_number: Optional[str] = None
     comment: Optional[str] = None
     work_comment: Optional[str] = None
+    services: List[SRequestServiceShortEdit] = []
+
 
 

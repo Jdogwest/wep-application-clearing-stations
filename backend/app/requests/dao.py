@@ -1,6 +1,6 @@
 from datetime import date
 from fastapi import HTTPException
-from sqlalchemy import func, select
+from sqlalchemy import delete, func, insert, select
 from sqlalchemy.orm import selectinload
 
 from app.dao.base import BaseDAO
@@ -152,7 +152,26 @@ class RequestDAO(BaseDAO):
                 raise HTTPException(status_code=404, detail="Заявка не найдена")
 
             for key, value in data:
+                if key == "services":
+                    continue
                 setattr(request, key, value)
+
+            for service in data.services:
+                await session.execute(
+                    delete(RequestService).where(
+                        RequestService.request_id == id and
+                        RequestService.service_id == service.service_id
+                    )
+                )
+
+            for service in data.services:
+                await session.execute(
+                    insert(RequestService).values(
+                        request_id=id,
+                        service_id=service.service_id,
+                        amount=service.amount
+                    )
+                )
 
             await session.commit()
             return {"message": "Заявка успешно обновлена"}
